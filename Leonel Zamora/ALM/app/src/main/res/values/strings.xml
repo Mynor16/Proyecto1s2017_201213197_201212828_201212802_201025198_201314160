@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ALM</string>
+    <string name="mostrar_usuario">Usuario</string>
+    <string name="mostrar_contraseña">Constraseña</string>
+    <string name="mostrar_empresa">Empresa</string>
+    <string name="mostrar_departamento">Departamento</string>
+    <string name="editor_usuario">Ingrese su Usuario</string>
+    <string name="editor_contraseña">Ingrese su Contraseña</string>
+    <string name="editor_empresa">Ingrese su Empresa</string>
+    <string name="editor_departamento">Ingrese su Departamento</string>
+    <string name="btn_ingresar">Ingresar</string>
+    <string name="btn_registrar">Registrar Devolucion</string>
+    <string name="btn_rentar">Rentar</string>
+    <string name="btn_cerrarsesion">Cerrar Sesion</string>
+    <string name="mostrar_menu">Menu Principal</string>
+    <string name="mostrar_rentas">Renta de Activos</string>
+    <string name="id_produto">Id Producto</string>
+    <string name="tiempo_renta">Tiempo de Renta</string>
+    <string name="dias">Dias</string>
+    <string name="nombre_producto">Nombre Producto</string>
+    <string name="descripcion_producto">Descripcion del Producto</string>
+    <string name="rentar_producto">Rentar</string>
+    <string name="devoluciones">Devoluciones</string>
+    <string name="btn_devolver">Devolver</string>
+</resources>
