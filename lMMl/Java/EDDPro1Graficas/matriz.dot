@@ -1,0 +1,19 @@
+digraph ejemplo_1 { 
+node [shape=record,width=.1,height=.1];
+rank = same {  
+lMMllMMl[shape=box,label="lMMl"] 
+lMMlManuel[shape=box,label="Manuel"] 
+lMMllMMl->lMMlManuel 
+lMMlManuel->lMMllMMl 
+} 
+rank = same {  
+MoraleslMMl[shape=box,label="Morales"] 
+MoralesManuel[shape=box,label="Luis"] 
+MoraleslMMl->MoralesManuel 
+MoralesManuel->MoraleslMMl 
+} 
+lMMllMMl->MoraleslMMl 
+MoraleslMMl->lMMllMMl 
+lMMlManuel->MoralesManuel 
+MoralesManuel->lMMlManuel 
+}
