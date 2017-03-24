@@ -30,24 +30,23 @@
                 <p><input type="text" name="Empresa" id="Empresa"/></p>
                 <h3>Departamento</h3>
                 <p><input type="text" name="Departamento" id="Departamento"/></p>
-                <p><input type="submit" name="Entrar" id="Entrar" value="Login"/></p>
+                <p><input type="button" name="Entrar" id="Entrar" value="Login" onclick="redirausuario()"/></p>
                 <script src="js/script.js"></script>
                 <p><input  type="button" value="Registrar Usuario" onclick="redir()" /></p>
             </form>
             
             </div>
-        </center>
-  
-            
-            <script type="text/javascript" > 
-function redir() 
-{ 
-    location.href="Registrar.jsp";
-} 
-</script> 
-            
-         
-                
+        </center>            
+        <script type="text/javascript" > 
+        function redir() 
+        { 
+            location.href="Registrar.jsp";
+        }
+        function redirausuario() 
+        { 
+            location.href="MenuUsuario.jsp";
+        }
         
+        </script>       
     </body>
 </html>

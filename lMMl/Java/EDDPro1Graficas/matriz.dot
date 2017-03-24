@@ -2,18 +2,18 @@ digraph ejemplo_1 {
 node [shape=record,width=.1,height=.1];
 rank = same {  
 lMMllMMl[shape=box,label="lMMl"] 
-lMMlManuel[shape=box,label="Manuel"] 
-lMMllMMl->lMMlManuel 
-lMMlManuel->lMMllMMl 
+lMMlverde[shape=box,label="verde"] 
+lMMllMMl->lMMlverde 
+lMMlverde->lMMllMMl 
 } 
 rank = same {  
-MoraleslMMl[shape=box,label="Morales"] 
-MoralesManuel[shape=box,label="Luis"] 
-MoraleslMMl->MoralesManuel 
-MoralesManuel->MoraleslMMl 
+ingenielMMl[shape=box,label="ingenie"] 
+ingenieverde[shape=box,label="anibak"] 
+ingenielMMl->ingenieverde 
+ingenieverde->ingenielMMl 
 } 
-lMMllMMl->MoraleslMMl 
-MoraleslMMl->lMMllMMl 
-lMMlManuel->MoralesManuel 
-MoralesManuel->lMMlManuel 
+lMMllMMl->ingenielMMl 
+ingenielMMl->lMMllMMl 
+lMMlverde->ingenieverde 
+ingenieverde->lMMlverde 
 }
