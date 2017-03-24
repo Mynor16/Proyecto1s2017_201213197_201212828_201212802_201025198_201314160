@@ -44,7 +44,7 @@ def graficarMatriz():
 
 #***************** METODOS AVL *****************#
 	
-avlT.insertarAVL("hoja","fdjkdf")	
+"""avlT.insertarAVL("hoja","fdjkdf")	
 avlT.insertarAVL("libro","dsfsda")	
 avlT.insertarAVL("escritorio","dfddf")	
 avlT.insertarAVL("casa","oerjsd")	
@@ -57,12 +57,16 @@ print ("*****************************")
 #avlT.eliminarAVL("3")
 #print ("Nodo eliminado")
 #print ("*****************************")
-#avlT.graficarAVL()
+#avlT.graficarAVL()"""
 
-# mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")#
-#mt.graficar()
+mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")
+mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")
+mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
+mt.graficar()
+mt.buscar("alo", "gerencia")
+mt.verificarUsuario("aom", "alo", "gerencia")
 #***********************************************#
 
 if __name__ == "__main__":
 	print("Servidor iniciado...")
-	#app.run(debug=True, host='192.168.43.165:5000')
+	#app.run(debug=True, host='192.168.0.100')

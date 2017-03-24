@@ -8,6 +8,7 @@ class Matriz(object):
 		self.ejeX = ListaIndice()
 		self.ejeY = ListaIndice()
 		self.indice = None
+		self.userL = None
 
 	def getNodoIndiceX(self, posX):
 		nodoIndiceX = self.ejeX.buscar(posX)
@@ -35,24 +36,32 @@ class Matriz(object):
 			nodo.padreY = nodoIndiceY
 			nodoIndiceX.listaNodos.insertarX(nodo)
 			nodoIndiceY.listaNodos.insertarY(nodo)
-			print("sdfsad")
+			#print("sdfsad")
 		else:
-			print("dfas")
+			#print("dfas")
 			nodo.agregarUsuario(usuario)
 			nodo.agregarContraseña(contraseña)
 			nodo.agregarNombre(nombre)
 
-	def buscar(self, x, y):
+	def buscar(self, empresa, depto):
 		tempY = self.ejeY.inicio
 		while tempY != None:
 			tempXinterno = tempY.listaNodos.inicio
-			if tempY.getIndice() == y:
+			if tempY.getIndice() == depto:
 				while tempXinterno != None:
-					if tempXinterno.padreX.getIndice() == x:
+					if tempXinterno.padreX.getIndice() == empresa:
+						self.userL = tempXinterno
+						print("Nodo " + self.userL.getUsuario() + " encontrado")
 						return tempXinterno
 					tempXinterno = tempXinterno.derecha
 			tempY = tempY.siguiente
 		return None
+
+	def verificarUsuario(self, usuario, empresa, depto):
+		self.buscar(empresa, depto)
+		if usuario == self.userL.getUsuario():
+			print ("Usuario " + usuario + " correcto")
+
 
 	def graficar(self):
 		grafo = "digraph G {\n" + "rankdir = TB;\n" + "rank = min;\n" + "node[style=filled,shape=box, label=\"Inicio\", rankdir=UD];\n"
