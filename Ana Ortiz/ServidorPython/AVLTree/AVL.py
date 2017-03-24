@@ -1,188 +1,225 @@
-from .NodoAVL import NodoAVL
 from graphviz import Source
+from .NodoAVL import NodoAVL
 
 import hashlib
 import time
 
 class AVL(object):
-
 	def __init__(self):
 		self.raiz = None
+		self.h = False
 		self.grafo = ""
-
-	def buscar(self, idNode):
-		nodo = self.raiz
-		if self.raiz == None:
-			return None
-		elif nodo.id == idNode:
-			return str(nodo.id) + " -- " + str(nodo.nombre)
-		elif nodo.id < idNode:
-			return self.buscar(idNode, nodo.hijoDer)
-		else:
-			return self.buscar(idNode, nodo.hijoIzq)
-
-#**** METODO PARA OBTENER EL FACTOR DE EQUILIBRIO ****#
-	def getFE(self, nodo):
-		if nodo == None:
-			return (-1)
-		else:
-			return nodo.fe
-
+#******************************************************#
 #********************* ROTACIONES *********************#
-	def rotacionIzquierda(self, nodo):
-		aux = nodo.hijoIzq
-		nodo.hijoIzq = aux.hijoDer
-		aux.hijoDer = nodo
-		nodo.fe = max(self.getFE(nodo.hijoIzq), self.getFE(nodo.hijoDer)) + 1
-		aux.fe = max(self.getFE(aux.hijoIzq), self.getFE(aux.hijoDer)) + 1
-		return aux
-
-	def rotacionDerecha(self, nodo):
-		aux = nodo.hijoDer
-		nodo.hijoDer = aux.hijoIzq
-		aux.hijoIzq = nodo
-		nodo.fe = max(self.getFE(nodo.hijoIzq), self.getFE(nodo.hijoDer)) + 1
-		aux.fe = max(self.getFE(aux.hijoIzq), self.getFE(aux.hijoDer)) + 1
-		return aux
-
-	def rotacionDobleIzquierda(self, nodo):
-		nodo.hijoIzq = self.rotacionDerecha(nodo.hijoIzq)
-		temp = self.rotacionIzquierda(nodo)
-		return temp
-
-	def rotacionDobleDerecha(self, nodo):
-		nodo.hijoDer = self.rotacionIzquierda(nodo.hijoDer)
-		temp = self.rotacionDerecha(nodo)
-		return temp
-#******************************************************#	
-
-	def insertarAVL(self, nodo, subAr):
-		nuevoPadre = subAr
-		if nodo.id < subAr.id:
-			if subAr.hijoIzq == None:
-				subAr.hijoIzq = nodo
-			else:
-				subAr.hijoIzq = self.insertarAVL(nodo, subAr.hijoIzq)
-				if (self.getFE(subAr.hijoIzq) - self.getFE(subAr.hijoDer)) == 2:
-					if nodo.id < subAr.hijoIzq.id:
-						nuevoPadre = self.rotacionIzquierda(subAr)
-					else:
-						nuevoPadre = self.rotacionDobleIzquierda(subAr)
-		elif nodo.id > subAr.id:
-			if subAr.hijoDer == None:
-				subAr.hijoDer = nodo
-			else:
-				subAr.hijoDer = self.insertarAVL(nodo, subAr.hijoDer)
-				if (self.getFE(subAr.hijoDer) - self.getFE(subAr.hijoIzq)) == 2:
-					if nodo.id > subAr.hijoDer.id:
-						nuevoPadre = self.rotacionDerecha(subAr)
-					else:
-						nuevoPadre = self.rotacionDobleDerecha(subAr)
+	def rotacionIzquierda(self, n, n1):
+		n.hijoIzq = n1.hijoDer
+		n1.hijoDer = n
+		if n1.fe == -1:
+			n.fe = 0
+			n1.fe = 0
 		else:
-			print("Nodo Duplicado")
-			return "Nodo Duplicado"
+			n.fe = -1
+			n1.fe = 1
+		return n1
 
-		if (subAr.hijoIzq == None) and (subAr.hijoDer != None):
-			subAr.fe = subAr.hijoDer.fe + 1
-		elif (subAr.hijoDer == None) and (subAr.hijoIzq != None):
-			subAr.fe = subAr.hijoIzq.fe + 1
+	def rotacionDerecha(self, n , n1):
+		n.hijoDer = n1.hijoIzq
+		n1.hijoIzq = n
+		if n1.fe == 1:
+			n.fe = 0
+			n1.fe = 0
 		else:
-			subAr.fe = max(self.getFE(subAr.hijoIzq), self.getFE(subAr.hijoDer)) + 1
-		return nuevoPadre
+			n.fe = 1
+			n1.fe = -1
+		return n1
 
-	def insertar(self, nombre, descripcion):
+	def rotacionDobleIzquierda(self, n, n1):
+		n2 = n1.hijoDer
+		n.hijoIzq = n2.hijoDer
+		n2.hijoDer = n
+		n1.hijoDer = n2.hijoIzq
+		n2.hijoIzq = n1
+		if n2.fe == 1:
+			n1.fe = -1
+		else:
+			n1.fe = 0
+		if n2.fe == -1:
+			n.fe = 1
+		else:
+			n.fe = 0
+		n2.fe = 0
+		return n2
+
+	def rotacionDobleDerecha(self, n, n1):
+		n2 = n1.hijoIzq
+		n.hijoDer = n2.hijoIzq
+		n2.hijoIzq = n
+		n1.hijoIzq = n2.hijoDer
+		n2.hijoDer = n1
+		if n2.fe == 1:
+			n.fe = -1
+		else:
+			n.fe = 0
+		if n2.fe == -1:
+			n1.fe = 1
+		else:
+			n1.fe = 0
+		n2.fe = 0
+		return n2
+#******************************************************#
+#********************** INSERCIÓN *********************#
+	def insertar(self, idNode, nombre, descripcion, raiz):
+		if raiz == None:
+			raiz = NodoAVL(idNode, nombre, descripcion)
+			self.h = True
+		elif idNode < raiz.idNode:
+			raiz.hijoIzq = self.insertar(idNode, nombre, descripcion, raiz.hijoIzq)
+			if self.h == True:
+				if raiz.fe == 1:
+					raiz.fe = 0
+					self.h = False
+				elif raiz.fe == 0:
+					raiz.fe = -1
+				elif raiz.fe == -1:
+					n1 = raiz.hijoIzq
+					if n1.fe == (-1):
+						raiz = self.rotacionIzquierda(raiz, n1)
+					else:
+						raiz = self.rotacionDobleIzquierda(raiz, n1)
+					self.h = False
+		elif idNode > raiz.idNode:
+			raiz.hijoDer = self.insertar(idNode, nombre, descripcion, raiz.hijoDer)
+			if self.h == True:
+				if raiz.fe == 1:
+					n1 = raiz.hijoDer
+					if n1.fe == 1:
+						raiz = self.rotacionDerecha(raiz, n1)
+					else:
+						raiz = self.rotacionDobleDerecha(raiz, n1)
+					self.h = False
+				elif raiz.fe == 0:
+					raiz.fe = 1
+				elif raiz.fe == -1:
+					raiz.fe = 0
+					self.h = False
+		else:
+			print ("Clave repetida")
+		return raiz
+
+	def insertarAVL(self, nombre, descripcion):
+		#*************** ID RANDOM ***************#
 		i = hashlib.md5(str(time.time()).encode())
 		str_i = i.hexdigest()
-		idstr = str_i[:15]
-		print (idstr)
-		nuevo = NodoAVL(idstr, nombre, descripcion)
-		if self.raiz == None:
-			self.raiz = nuevo
+		idNode = str_i[:15]
+		print (idNode + "\t")
+		#*****************************************#
+		self.h = False
+		self.raiz = self.insertar(idNode, nombre, descripcion, self.raiz)
+		print (idNode + "--" + nombre)
+		self.enOrden(self.raiz)
+#******************************************************#
+#********************* ELIMINACIÓN ********************#
+	def eliminar(self, idNode, raiz):
+		if raiz == None:
+			print ("Nodo no existe")
+		elif idNode < raiz.idNode:
+			raiz.hijoIzq = self.eliminar(idNode, raiz.hijoIzq)
+			if self.h == True:
+				raiz = self.equilibrar1(raiz)
+		elif idNode > raiz.idNode:
+			raiz.hijoDer = self.eliminar(idNode, raiz.hijoDer)
+			if self.h == True:
+				raiz = self.equilibrar2(raiz)
 		else:
-			self.raiz = self.insertarAVL(nuevo, self.raiz)
-
-	def eliminarAVL(self, nodo, subAr):
-		nuevoPadre = subAr
-		if nodo.id < subAr.id:
-			subAr.hijoIzq = self.eliminar(nodo, subAr.hijoIzq)
-		elif nodo.id > subAr.id:
-			subAr.hijoDer = self.eliminar(nodo, subAr.hijoDer)
-		else:
-			if subAr.hijoIzq == None:
-				if subAr.hijoDer == None:
-					temp = self.raiz
-					self.raiz = None
-				else:
-					temp = subAr.hijoDer
-					self.raiz = temp
-				del temp
-			elif subAr.hijoDer == None:
-				if subAr.hijoIzq == None:
-					temp = self.raiz
-					self.raiz = None
-				else:
-					temp = subAr.hijoIzq
-					self.raiz = temp
-				del temp
+			q = raiz
+			if q.hijoIzq == None:
+				raiz = q.hijoDer
+				self.h = True
+			elif q.hijoDer == None:
+				raiz = q.hijoIzq
+				self.h = True
 			else:
-				temp = subAr.hijoDer
-				while temp.hijoIzq:
-					temp = temp.hijoIzq
-					subAr.id = temp.id
-					subAr.hijoDer = self.eliminar(nodo, temp.hijoDer.id)
-			if self.raiz:
-				subAr.fe = self.raiz.fe
-				if (self.getFE(subAr.hijoDer) - self.getFE(subAr.hijoIzq)) > 1:
-					if  self.getFE(subAr.hijoIzq) > 0:
-						nuevoPadre = self.rotacionDerecha(subAr)
-					else:
-						nuevoPadre = self.rotacionDobleDerecha(subAr)
-				elif (self.getFE(subAr.hijoIzq) - self.getFE(subAr.hijoDer)) > 1:
-					if self.getFE(subAr.hijoDer) < 0:
-						nuevoPadre = self.rotacionIzquierda(subAr)
-					else:
-						nuevoPadre = self.rotacionDobleIzquierda(subAr)
-		if (subAr.hijoIzq == None) and (subAr.hijoDer != None):
-			subAr.fe = subAr.hijoDer.fe + 1
-		elif (subAr.hijoDer == None) and (subAr.hijoIzq != None):
-			subAr.fe = subAr.hijoIzq.fe + 1
-		else:
-			subAr.fe = max(self.getFE(subAr.hijoIzq), self.getFE(subAr.hijoDer)) + 1
-		return nuevoPadre
+				raiz.hijoIzq = self.reemplazar(q, q.hijoIzq)
+				if self.h:
+					raiz = self.equilibrar1(raiz)
+			q == None		
+		return raiz
 
-	def eliminar(self, id):
-		nodo = self.raiz
-		if self.raiz == None:
-			return "Arbol vacio"
+	def eliminarAVL(self, idNode):
+		self.h = False
+		self.raiz = self.eliminar(idNode, self.raiz)
+		self.enOrden(self.raiz)
+
+	def reemplazar(self, n, actual):
+		if actual.hijoDer != None:
+			actual.hijoDer = self.reemplazar(n, actual.hijoDer)
+			if self.h:
+				actual = self.equilibrar2(actual)
 		else:
-			self.eliminarAVL(nodo, self.raiz)
-			
+			n.idNode = actual.idNode
+			n = actual
+			actual = actual.hijoIzq
+			self.h = True
+		return actual
+
+	def equilibrar1(self, n):
+		if n.fe == -1:
+			n.fe = 0
+		elif n.fe == 0:
+			n.fe = 1
+			self.h = False
+		elif n.fe == 1:
+			n1 = n.hijoDer
+			if n1.fe >= 0:
+				if n1.fe == 0:
+					self.h = False
+				n = self.rotacionDerecha(n, n1)
+			else:
+				n = self.rotacionDobleDerecha(n, n1)
+		return n
+
+	def equilibrar2(self, n):
+		if n.fe == -1:
+			n1 = n.hijoIzq
+			if n1.fe <= 0:
+				if n1.fe == 0:
+					self.h = False
+				n = self.rotacionIzquierda(n, n1)
+			else:
+				n = self.rotacionDobleIzquierda(n, n1)
+		elif n.fe == 0:
+			n.fe = -1
+			self.h = False
+		elif n.fe == 1:
+			n.fe = 0
+		return n
+#******************************************************#
 #********************* RECORRIDOS *********************#
 	def preOrden(self, nodo):
 		if nodo != None:
-			print(nodo.id + ",")
+			print(nodo.idNode + ",")
 			self.preOrden(nodo.hijoIzq)
 			self.preOrden(nodo.hijoDer)
 	
 	def enOrden(self, nodo):
 		if nodo != None:
-			self.preOrden(nodo.hijoIzq)
-			print(nodo.id + ",")
-			self.preOrden(nodo.hijoDer)
+			self.enOrden(nodo.hijoIzq)
+			print("--" + nodo.idNode + ",")
+			self.enOrden(nodo.hijoDer)
 
 	def postOrden(self, nodo):
 		if nodo != None:
-			self.preOrden(nodo.hijoIzq)
-			self.preOrden(nodo.hijoDer)
-			print(nodo.id + ",")
+			self.postOrden(nodo.hijoIzq)
+			self.postOrden(nodo.hijoDer)
+			print(nodo.idNode + ",")
 #******************************************************#
-
 #********************** GRAFICAR **********************#
 	def graficarNodo(self, nodo):
 		if nodo != None:
 			i = nodo.getID()
 			self.grafo += "\"" + str(i) + "\"[label=\"<f0> Izq|<f1>"
-			self.grafo += "ID: " + nodo.getID() + "\\nNombre: " + nodo.getNombreArticulo()
+			#self.grafo += "ID: " + nodo.getID() 
+			self.grafo += "ID: " + nodo.getID() + "\\nNombre: " + nodo.getNombre()
 			self.grafo += "|<f2> Der\", style=fille]; \n"
 
 			if nodo.hijoIzq != None:

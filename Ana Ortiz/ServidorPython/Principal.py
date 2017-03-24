@@ -11,47 +11,53 @@ app = Flask('Proyecto1_ServidorPython')
 avlT = AVL()
 mt = Matriz()
 #***********************************************#
-
-#***************** METODOS AVL *****************#
+"""#***************** METODOS AVL *****************#
 @app.route('/insertarAVL',methods=['POST']) 
 def insertarAVL():
-	articulo = str(request.form['nombre'])
-	descripcion = str(request.form['desc'])
-	avlT.insertar(str(articulo), str(descripcion))
-	return "Articulo insertado con exito!"
+    articulo = str(request.form['nombre'])
+    descripcion = str(request.form['desc'])
+    avlT.insertar(str(articulo), str(descripcion))
+    return "Articulo insertado con exito!"
 
 @app.route('/graficarAVL',methods=['POST'])
 def graficarAVL():
-	ls.graficarAVL()
-	return "Lista Graficada" 
+    ls.graficarAVL()
+    return "Lista Graficada" 
 #***********************************************#
 
 #************ METODOS  MATRIZ  ************#
 @app.route('/insertarMatriz',methods=['POST']) 
 def insertarMatriz():
-	usuario = str(request.form['user'])
-	contraseña = str(request.form['password'])
-	nombre = str(request.form['name'])
-	mt.insertar(str(usuario), str(contraseña), str(nombre))
-	return "Usuario insertado con exito!"	
+    usuario = str(request.form['user'])
+    contraseña = str(request.form['password'])
+    nombre = str(request.form['name'])
+    depto = str(request.form['depto'])
+    empresa = str(request.form['empresa'])
+    mt.insertar(str(usuario), str(contraseña), str(nombre), str(depto), str(empresa))
+    return "Usuario insertado con exito!"   
 
 @app.route('/graficarMatriz',methods=['POST']) 
 def graficarMatriz():
-	mt.graficar()
-	return "Matriz Graficada" 
-#***********************************************#
+    mt.graficar()
+    return "Matriz Graficada" 
+#***********************************************#"""
 
 #***************** METODOS AVL *****************#
 	
-# avlT.insertar("libro","libro hola 123")	
-# avlT.insertar("libro","libro hola 123")	
-# avlT.insertar("libro","libro hola 123")	
-# avlT.insertar("libro","libro hola 123")	
-# avlT.insertar("libro","libro hola 123")	
-# print ("Articulo ingresado con exito!")
-# print ("*****************************")
-# avlT.graficarAVL()
-# print ("Arbol Graficado!")
+avlT.insertarAVL("hoja","fdjkdf")	
+avlT.insertarAVL("libro","dsfsda")	
+avlT.insertarAVL("escritorio","dfddf")	
+avlT.insertarAVL("casa","oerjsd")	
+avlT.insertarAVL("banco","kljfdi")	
+print ("Articulo ingresado con exito!")
+print ("*****************************")
+avlT.graficarAVL()
+print ("Arbol Graficado!")
+print ("*****************************")
+#avlT.eliminarAVL("3")
+#print ("Nodo eliminado")
+#print ("*****************************")
+#avlT.graficarAVL()
 
 # mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")#
 #mt.graficar()
@@ -59,4 +65,4 @@ def graficarMatriz():
 
 if __name__ == "__main__":
 	print("Servidor iniciado...")
-	app.run(debug=True, host='127.0.0.1')
+	#app.run(debug=True, host='192.168.43.165:5000')

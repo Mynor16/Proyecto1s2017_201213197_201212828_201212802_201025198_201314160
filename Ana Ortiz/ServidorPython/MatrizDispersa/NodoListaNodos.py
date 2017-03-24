@@ -10,6 +10,8 @@ class NodoListaNodos(object):
 		self.listaUsuario = listaUsuario
 		self.listaContraseña = listaContraseña
 		self.listaNombre = listaNombre
+		from AVLTree.AVL import AVL
+		self.avlTree = AVL()
 
 
 	def getPosX(self):
@@ -35,3 +37,10 @@ class NodoListaNodos(object):
 	
 	def getNombre(self):
 		return self.listaNombre
+
+	def getNodoAVL(self):
+		return self.avlTree
+
+	def insertarNodoAVL(self, nombre, descripcion):
+		self.avlTree.insertar(nombre, descripcion)
+		return nombre + " -- " + descripcion

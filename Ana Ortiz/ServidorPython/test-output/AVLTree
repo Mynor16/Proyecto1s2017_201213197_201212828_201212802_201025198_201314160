@@ -1,14 +1,14 @@
 digraph G {node[shape=record, height=0.1];
 { 
-"46429fb0d0db0ce"[label="<f0> Izq|<f1>ID: 46429fb0d0db0ce\nNombre: libro|<f2> Der", style=fille]; 
-"46429fb0d0db0ce":f0 -> "428a1de4f07f0cd":f1 ;
-"428a1de4f07f0cd"[label="<f0> Izq|<f1>ID: 428a1de4f07f0cd\nNombre: libro|<f2> Der", style=fille]; 
-"428a1de4f07f0cd":f0 -> "2dedaded2311b49":f1 ;
-"2dedaded2311b49"[label="<f0> Izq|<f1>ID: 2dedaded2311b49\nNombre: libro|<f2> Der", style=fille]; 
-"46429fb0d0db0ce":f2 -> "e92866e345bb737":f1 ;
-"e92866e345bb737"[label="<f0> Izq|<f1>ID: e92866e345bb737\nNombre: libro|<f2> Der", style=fille]; 
-"e92866e345bb737":f0 -> "4e2dca0fa06b271":f1 ;
-"4e2dca0fa06b271"[label="<f0> Izq|<f1>ID: 4e2dca0fa06b271\nNombre: libro|<f2> Der", style=fille]; 
+"3ed1f3f54064c16"[label="<f0> Izq|<f1>ID: 3ed1f3f54064c16\nNombre: hoja|<f2> Der", style=fille]; 
+"3ed1f3f54064c16":f0 -> "2366330c0def381":f1 ;
+"2366330c0def381"[label="<f0> Izq|<f1>ID: 2366330c0def381\nNombre: escritorio|<f2> Der", style=fille]; 
+"2366330c0def381":f2 -> "3a63f9e8a02471a":f1 ;
+"3a63f9e8a02471a"[label="<f0> Izq|<f1>ID: 3a63f9e8a02471a\nNombre: banco|<f2> Der", style=fille]; 
+"3ed1f3f54064c16":f2 -> "8952097fcc71a53":f1 ;
+"8952097fcc71a53"[label="<f0> Izq|<f1>ID: 8952097fcc71a53\nNombre: libro|<f2> Der", style=fille]; 
+"8952097fcc71a53":f2 -> "b9d52aa445fdaa3":f1 ;
+"b9d52aa445fdaa3"[label="<f0> Izq|<f1>ID: b9d52aa445fdaa3\nNombre: casa|<f2> Der", style=fille]; 
 } 
 labelloc="t";
 label=" AVL ARTICULOS ACTIVOS";}
