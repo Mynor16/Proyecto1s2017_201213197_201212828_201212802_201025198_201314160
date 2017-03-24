@@ -32,18 +32,6 @@
                 <p><input type="text" name="Departamento" id="Departamento"/></p>
                 <p><input type="submit" name="Registrar" id="Entrar" value="Registrar Usuario"/></p>
                 <script src="js/script.js"></script>
-                <p><input  type="button" value="Registrar Usuario" onclick="redir()" /></p>
-            </form>
-            
-            </div>
-        </center>
-                
-        <center> 
-            
-            <div>
-                
-            <form action="Registrar.jsp" method="post">
-                <p><input  type="button" value="Registrar Usuario" onclick="" /></p>
             </form>
             
             </div>
