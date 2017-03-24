@@ -1,0 +1,34 @@
+digraph ArbolB{
+	node [fontcolor="black", height=0.5, color="red"]
+
+node[shape=box, peripheries=2, color=orange, style= filled]; 
+	edge [color="black", dir=fordware]
+
+graph [rankdir= UD];
+nodo0356[style=filled, label= " 356   |   755   |   800   |   "];
+
+nodo0356->nodo044;
+
+nodo044[style=filled, label= " 44   |   105   |   "];
+
+nodo044->nodo05;
+
+nodo05[style=filled, label= " 5   |   32   |   "];
+
+nodo05->nodo02;
+
+nodo02[style=filled, label= " 2   |   3   |   "];
+
+nodo05->nodo066;
+
+nodo066[style=filled, label= " 66   |   77   |   "];
+
+nodo044->nodo0100;
+
+nodo0100[style=filled, label= " 100   |   487   |   "];
+
+nodo0356->nodo0500;
+
+nodo0500[style=filled, label= " 500   |   5214   |   "];
+
+}

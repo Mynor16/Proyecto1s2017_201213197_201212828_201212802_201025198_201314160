@@ -1,0 +1,85 @@
+package parseo;
+
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+
+parser code
+{:  
+    
+    
+    //** Metodo al que se llama automaticamente ante algun error sintactico.*/
+    public void syntax_error(Symbol s)
+    {        
+        
+    }
+
+    /**Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores.*/
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
+    {        
+
+    }
+
+
+
+public void guardarCadena(String cadena, String directorio){
+
+FileWriter txt = null;
+        PrintWriter imp = null;
+        try {
+            txt = new FileWriter(directorio);
+            imp = new PrintWriter(txt);
+            
+            imp.println(cadena);
+            
+
+        } catch (IOException ex) {
+            System.out.println("Excepcion : " + ex + "\n");
+        }//FIN DEL TRY CATCH
+        finally {
+            try {
+                if (null != txt) {
+                    txt.close();
+                }
+            } catch (Exception ex1) {
+                ex1.printStackTrace();
+            }
+        }
+
+}
+
+
+
+ 
+
+:}
+
+
+
+action code
+{:
+    String cadena="";
+    String cadena2="";
+    String directorioDatos = "/home/carlos/NetBeansProjects/servidor_Java_201213194/reportes/datos.txt";
+    String directorioDatos2="/home/carlos/NetBeansProjects/servidor_Java_201213194/reportes/datos2.txt";
+:}
+
+//***simbolos definidos en el lexico
+
+terminal String guion, mayor, puntoycoma, coma, numero, id;
+
+
+non terminal INICIO, INSTRUCCIONES1, INSTRUCCIONES2;
+
+INICIO::= INSTRUCCIONES1;
+
+INSTRUCCIONES1::=INSTRUCCIONES1 INSTRUCCIONES2
+                |INSTRUCCIONES2;
+
+INSTRUCCIONES2::=id:a guion mayor id:b puntoycoma {:cadena+=a+","+b+","; parser.guardarCadena(cadena, directorioDatos);:};
+
+                 
