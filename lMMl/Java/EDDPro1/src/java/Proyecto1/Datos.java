@@ -46,11 +46,13 @@ public class Datos {
         String r = getString("metodoWeb", formBody);
         return r;
     }
-    public String AgregaraMatriz(String Empresa, String Departamento, String Usuario){
+    public String AgregaraMatriz(String Usuario, String pass, String nom,String depto, String empresa){
             RequestBody formBody = new FormEncodingBuilder()
-                .add("empresa", Empresa)
-                .add("departamento", Departamento)
-                .add("usuario", Usuario)
+                .add("user", Usuario)
+                .add("password", pass)
+                .add("name", nom)
+                .add("depto", depto)
+                .add("empresa", empresa)
                 .build();
             String r = getString("agregaramatriz", formBody); 
             System.out.println(r);

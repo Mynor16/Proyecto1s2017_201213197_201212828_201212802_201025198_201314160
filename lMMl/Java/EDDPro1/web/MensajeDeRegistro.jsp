@@ -20,8 +20,9 @@
         <center>
             
             <% Datos dato = new Datos();
-        String respuesta = dato.AgregaraMatriz(request.getParameter("Empresa").toString(), request.getParameter("Departamento").toString(), request.getParameter("user").toString()); %>
-        <% out.print("<h2>"+respuesta+"</h2>"); %>
+            String respuesta = dato.AgregaraMatriz("Luis","pass","Luis","Ventas","usac");
+        //String respuesta = dato.AgregaraMatriz(request.getParameter("Empresa").toString(), request.getParameter("Departamento").toString(), request.getParameter("user").toString()); %>
+        <% out.print("<h2>"+respuesta+"</h2>"); request.setAttribute("user", "dato"); %>
             
         </center>
        
@@ -29,11 +30,20 @@
         <center> 
             
             <div>
-                
+                <input type="text" name="user" id="user"/>
             <form action="Registrar.jsp" method="post">
-                <p><input  type="button" value="Regreso" onclick="" /></p>
+                <p><input  type="button" value="Principal" onclick="redirindex()" /></p>
+                <p><input  type="button" value="Registrar Usuario" onclick="redir()" /></p>
             </form>
-            
+        <script type="text/javascript" > 
+        function redir() 
+        { 
+            location.href="Registrar.jsp";
+        }
+        function redirindex(){
+            location.href="index.jsp";
+        }
+        </script>  
             </div>
         </center>
                 
