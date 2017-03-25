@@ -36,6 +36,14 @@ def insertarMatriz():
     mt.insertar(str(usuario), str(contraseña), str(nombre), str(depto), str(empresa))
     return "Usuario insertado con exito!"   
 
+@app.route('/verificarUsuario',methods=['POST']) 
+def verificarUsuario():
+    usuario = str(request.form['user'])
+    empresa = str(request.form['empresa'])
+    depto = str(request.form['depto'])
+    mt.verificarUsuario(str(usuario), str(empresa), str(depto))
+    return "Usuario" + usuario + "correcto!"
+
 @app.route('/graficarMatriz',methods=['POST']) 
 def graficarMatriz():
     mt.graficar()
@@ -64,7 +72,7 @@ mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")
 mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
 mt.graficar()
 mt.buscar("alo", "gerencia")
-mt.verificarUsuario("aom", "alo", "gerencia")
+mt.verificarUsuario("sdom", "alo", "gerencia")
 #***********************************************#
 
 if __name__ == "__main__":

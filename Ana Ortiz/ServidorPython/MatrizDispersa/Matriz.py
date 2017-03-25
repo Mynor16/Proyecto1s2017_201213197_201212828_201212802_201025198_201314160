@@ -27,6 +27,7 @@ class Matriz(object):
 	def insertar(self, usuario, contraseña, nombre, departamento, empresa):
 		posX = empresa
 		posY = departamento
+		
 		nodoIndiceX = self.getNodoIndiceX(posX)
 		nodoIndiceY = self.getNodoIndiceY(posY)
 		nodo = self.buscar(posX, posY)
@@ -36,9 +37,7 @@ class Matriz(object):
 			nodo.padreY = nodoIndiceY
 			nodoIndiceX.listaNodos.insertarX(nodo)
 			nodoIndiceY.listaNodos.insertarY(nodo)
-			#print("sdfsad")
 		else:
-			#print("dfas")
 			nodo.agregarUsuario(usuario)
 			nodo.agregarContraseña(contraseña)
 			nodo.agregarNombre(nombre)
@@ -61,7 +60,15 @@ class Matriz(object):
 		self.buscar(empresa, depto)
 		if usuario == self.userL.getUsuario():
 			print ("Usuario " + usuario + " correcto")
+			return "True"
+		else:
+			print ("Usuario " + usuario + " incorrecto!")
+			return "False"
 
+	def insertarAVLEnMatriz(self, usuario, empresa, depto, nombreA, descA):
+		self.buscar(empresa,depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.insertarNodoAVL(nombreA, descA)
 
 	def graficar(self):
 		grafo = "digraph G {\n" + "rankdir = TB;\n" + "rank = min;\n" + "node[style=filled,shape=box, label=\"Inicio\", rankdir=UD];\n"
