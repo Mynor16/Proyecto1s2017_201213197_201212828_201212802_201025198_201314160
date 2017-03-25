@@ -111,11 +111,11 @@ class AVL(object):
 		i = hashlib.md5(str(time.time()).encode())
 		str_i = i.hexdigest()
 		idNode = str_i[:15]
-		print (idNode + "\t")
+		#print (idNode + "\t")
 		#*****************************************#
 		self.h = False
 		self.raiz = self.insertar(idNode, nombre, descripcion, self.raiz)
-		print (idNode + "--" + nombre)
+		#print (idNode + "--" + nombre)
 		self.enOrden(self.raiz)
 #******************************************************#
 #********************* ELIMINACIÓN ********************#

@@ -69,6 +69,12 @@ class Matriz(object):
 		self.buscar(empresa,depto)
 		if usuario == self.userL.getUsuario():
 			self.userL.insertarNodoAVL(nombreA, descA)
+			print("Nodo insertado en Matriz: " + nombreA + "--" + descA)
+
+	def graficarAVLMatriz(self, usuario, empresa, depto):
+		self.buscar(empresa,depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.graficarAVLM()
 
 	def graficar(self):
 		grafo = "digraph G {\n" + "rankdir = TB;\n" + "rank = min;\n" + "node[style=filled,shape=box, label=\"Inicio\", rankdir=UD];\n"

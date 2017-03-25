@@ -38,9 +38,13 @@ class NodoListaNodos(object):
 	def getNombre(self):
 		return self.listaNombre
 
-	def getNAVL(self):
+	def getAVL(self):
 		return self.avlTree
 
 	def insertarNodoAVL(self, nombre, descripcion):
-		self.avlTree.insertar(nombre, descripcion)
-		return nombre + " -- " + descripcion
+		self.avlTree.insertarAVL(nombre, descripcion)
+		#return "Nodo insertado: " + nombre + " -- " + descripcion
+
+	def graficarAVLM(self):
+		self.avlTree.graficarAVL()
+		

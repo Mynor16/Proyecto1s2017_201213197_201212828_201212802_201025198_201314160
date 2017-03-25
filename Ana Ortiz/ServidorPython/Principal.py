@@ -73,6 +73,10 @@ mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
 mt.graficar()
 mt.buscar("alo", "gerencia")
 mt.verificarUsuario("sdom", "alo", "gerencia")
+mt.insertarAVLEnMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
+mt.insertarAVLEnMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
+mt.insertarAVLEnMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
+mt.graficarAVLMatriz("aom", "alo", "gerencia")
 #***********************************************#
 
 if __name__ == "__main__":
