@@ -40,11 +40,12 @@ namespace EddHistorialesP1.Models
                 //System.Diagnostics.Debug.WriteLine("inserción de nodo en la raiz con id: "+P.idPagina);
 
             }
-            System.Diagnostics.Debug.WriteLine("inserción correcta de nodo :) -> "+raiz.idPagina+"."+clave.idT);//+P.claves[0].idT);
+            System.Diagnostics.Debug.WriteLine("inserción correcta de nodo :) -> " + raiz.idPagina + "." + clave.idT);//+P.claves[0].idT);
         }
 
         //empuja los elementos previos
-        public void empujar(nodoArbolB clave, EddP1PaginaArbolB raiz){
+        public void empujar(nodoArbolB clave, EddP1PaginaArbolB raiz)
+        {
             int k = 0;
             existe = false;
             if (vacio(raiz))
@@ -84,21 +85,20 @@ namespace EddHistorialesP1.Models
         //incerta una nueva clave en la pagina actual
         public void insertaHoja(nodoArbolB clave, EddP1PaginaArbolB raiz, int k)
         {
-            System.Diagnostics.Debug.WriteLine("incertando nodo en la pagina "+ raiz.idPagina);
+            System.Diagnostics.Debug.WriteLine("incertando nodo en la pagina " + raiz.idPagina);
             int i = raiz.cuenta;
             while (i != k)
-
             {
                 raiz.claves[i] = raiz.claves[i - 1];
-                System.Diagnostics.Debug.WriteLine("trasladando clave " + (i) + " de la rama " + raiz.idPagina + " a la posición " + (i-1) + " de la nueva pagina " + raiz);
+                System.Diagnostics.Debug.WriteLine("trasladando clave " + (i) + " de la rama " + raiz.idPagina + " a la posición " + (i - 1) + " de la nueva pagina " + raiz);
                 raiz.ramas[i + 1] = raiz.ramas[i];
-                System.Diagnostics.Debug.WriteLine("trasladando clave " + (i+1) + " de la rama " + raiz.idPagina + " a la posición " + (i) + " de la nueva pagina " + raiz);
+                System.Diagnostics.Debug.WriteLine("trasladando clave " + (i + 1) + " de la rama " + raiz.idPagina + " a la posición " + (i) + " de la nueva pagina " + raiz);
 
 
                 i--;
             }
             raiz.claves[k] = clave;
-            System.Diagnostics.Debug.WriteLine("se incertó la clave "+raiz.claves[k].idT+" en la posición "+k+ "de la pagina "+ raiz.idPagina);
+            System.Diagnostics.Debug.WriteLine("se incertó la clave " + raiz.claves[k].idT + " en la posición " + k + "de la pagina " + raiz.idPagina);
             raiz.ramas[k + 1] = xr;
             raiz.cuenta = ++raiz.cuenta;
         }
@@ -106,7 +106,7 @@ namespace EddHistorialesP1.Models
         //dividir pagina
         public void dividirN(nodoArbolB clave, EddP1PaginaArbolB raiz, int k)
         {
-            System.Diagnostics.Debug.WriteLine("dividiendo pagina "+raiz.idPagina);
+            System.Diagnostics.Debug.WriteLine("dividiendo pagina " + raiz.idPagina);
             int pos = 0;
             int posmda = 0;
             if (k <= 2)
@@ -123,7 +123,7 @@ namespace EddHistorialesP1.Models
             pos = posmda + 1;
             while (pos != 5)
             {
-                System.Diagnostics.Debug.WriteLine("trasladando clave "+(pos-1)+" de la rama "+ raiz.idPagina+" a la posición "+(pos-posmda-1)+" de la nueva pagina "+xDer.idPagina);
+                System.Diagnostics.Debug.WriteLine("trasladando clave " + (pos - 1) + " de la rama " + raiz.idPagina + " a la posición " + (pos - posmda - 1) + " de la nueva pagina " + xDer.idPagina);
                 xDer.claves[(pos - posmda) - 1] = raiz.claves[pos - 1];
                 xDer.ramas[pos - posmda] = raiz.ramas[pos];
                 pos++;
@@ -149,22 +149,45 @@ namespace EddHistorialesP1.Models
             return (raiz == null || raiz.cuenta == 0);
         }
 
-        public int buscarNodo(nodoArbolB clave, EddP1PaginaArbolB actual){
-		int j=0;
-		if(int.Parse(clave.idT) < int.Parse(actual.claves[0].idT)){
-			existe = false;
-			j=0;
-        }
-        else
+        public int buscarNodo(nodoArbolB clave, EddP1PaginaArbolB actual)
         {
-            j = actual.cuenta;
-            while (int.Parse(clave.idT) < int.Parse(actual.claves[j - 1].idT) && j > 1)
-                --j;
-            existe = (clave.idT == actual.claves[j - 1].idT);
+            int j = 0;
+            if (int.Parse(clave.idT) < int.Parse(actual.claves[0].idT))
+            {
+                existe = false;
+                j = 0;
+            }
+            else
+            {
+                j = actual.cuenta;
+                while (int.Parse(clave.idT) < int.Parse(actual.claves[j - 1].idT) && j > 1)
+                    --j;
+                existe = (clave.idT == actual.claves[j - 1].idT);
+            }
+            System.Diagnostics.Debug.WriteLine("se encontró el espacio en la posición " + j + "de la pagina " + actual.idPagina);
+            return j;
         }
-        System.Diagnostics.Debug.WriteLine("se encontró el espacio en la posición "+j+"de la pagina "+ actual.idPagina);
-        return j;
+
+        #region EliminarNodo
+        public void EliminarNodo(String codigo)
+        {
+            var tempraiz = this.P;
+            this.P = null;
+            if (!String.IsNullOrEmpty(codigo)) EliminarNodo(codigo, tempraiz);
         }
+
+        private void EliminarNodo(String codigo, EddP1PaginaArbolB raiz)
+        {
+            if (raiz != null)
+            {
+                for (int i = 0; i < raiz.claves.Count(); i++)
+                    if (!raiz.claves[i].Equals(codigo)) this.insertar(raiz.claves[i]);
+                for (int i = 0; i < raiz.ramas.Count(); i++)
+                    EliminarNodo(codigo, raiz.ramas[i]);
+            }
+        }
+
+        #endregion
 
         //*******************************************************************************************************
         void eliminar(nodoArbolB clave)

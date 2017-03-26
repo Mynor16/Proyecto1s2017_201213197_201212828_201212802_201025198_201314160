@@ -56,7 +56,9 @@ namespace EddHistorialesP1.Controllers
             arbolB.ingresar(products[6]);
             arbolB.ingresar(products[10]);
             arbolB.ingresar(products[8]);
-            arbolB.Graficar("ArbolBeddPractica1");
+            arbolB.Graficar("ArbolBEDDnuevo");
+            arbolB.EliminarNodo("17");
+            arbolB.Graficar("ArbolBEDDNodoEliminado");
             return;
         }
         public IEnumerable<nodoArbolB> GetAllProducts()
