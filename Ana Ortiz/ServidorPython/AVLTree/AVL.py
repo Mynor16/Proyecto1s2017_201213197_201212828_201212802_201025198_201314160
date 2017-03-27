@@ -68,12 +68,12 @@ class AVL(object):
 		return n2
 #******************************************************#
 #********************** INSERCIÓN *********************#
-	def insertar(self, idNode, nombre, descripcion, raiz):
+	def insertar(self, idNode, nombre, descripcion, rentado, raiz):
 		if raiz == None:
-			raiz = NodoAVL(idNode, nombre, descripcion)
+			raiz = NodoAVL(idNode, nombre, descripcion, False)
 			self.h = True
 		elif idNode < raiz.idNode:
-			raiz.hijoIzq = self.insertar(idNode, nombre, descripcion, raiz.hijoIzq)
+			raiz.hijoIzq = self.insertar(idNode, nombre, descripcion, False, raiz.hijoIzq)
 			if self.h == True:
 				if raiz.fe == 1:
 					raiz.fe = 0
@@ -88,7 +88,7 @@ class AVL(object):
 						raiz = self.rotacionDobleIzquierda(raiz, n1)
 					self.h = False
 		elif idNode > raiz.idNode:
-			raiz.hijoDer = self.insertar(idNode, nombre, descripcion, raiz.hijoDer)
+			raiz.hijoDer = self.insertar(idNode, nombre, descripcion, False, raiz.hijoDer)
 			if self.h == True:
 				if raiz.fe == 1:
 					n1 = raiz.hijoDer
@@ -114,7 +114,7 @@ class AVL(object):
 		#print (idNode + "\t")
 		#*****************************************#
 		self.h = False
-		self.raiz = self.insertar(idNode, nombre, descripcion, self.raiz)
+		self.raiz = self.insertar(idNode, nombre, descripcion, False, self.raiz)
 		#print (idNode + "--" + nombre)
 		self.enOrden(self.raiz)
 #******************************************************#
@@ -147,6 +147,22 @@ class AVL(object):
 
 	def modificarAVL(self, idNode, descA):
 		self.modificar(idNode, descA, self.raiz)
+#******************************************************#
+#******************* DISPONIBILIDAD *******************#
+	def cambiarEstado(self, idNode, raiz):
+		if raiz == None:
+			print ("Nodo no existe")
+		elif raiz.idNode == idNode:
+			print ("Nodo Encontrado: " + idNode + "--" + str(raiz.getDisponibilidad()))
+			raiz.rentado = True
+			print ("Estado Modificado: " + idNode + "--" + str(raiz.getDisponibilidad()))
+		elif raiz.idNode < idNode:
+			self.cambiarEstado(idNode, raiz.hijoDer)
+		else:
+			self.cambiarEstado(idNode, raiz.hijoIzq)
+
+	def cambiarEstadoAVL(self, idNode):
+		self.cambiarEstado(idNode, self.raiz)
 #******************************************************#
 #********************* ELIMINACIÓN ********************#
 	def eliminar(self, idNode, raiz):

@@ -9,6 +9,7 @@ class Matriz(object):
 		self.ejeY = ListaIndice()
 		self.indice = None
 		self.userL = None
+		self.xml = ""
 
 	def getNodoIndiceX(self, posX):
 		nodoIndiceX = self.ejeX.buscar(posX)
@@ -151,9 +152,65 @@ class Matriz(object):
 		if usuario == self.userL.getUsuario():
 			self.userL.modificarNodoAVL(idArt, descA)
 			print("Nodo Modificado: " + idArt + "--" + descA)
+	#******************** DISPONIBILIDAD ********************#
+	def disponibilidadAVLMatriz(self, usuario, empresa, depto, idArt):
+		self.buscar(empresa, depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.disponibilidadNodoAVL(idArt)
+			print("Nodo Modificado: " + idArt)
 	#********************** GRAFICAR **********************#
 	def graficarAVLMatriz(self, usuario, empresa, depto):
 		self.buscar(empresa,depto)
 		if usuario == self.userL.getUsuario():
 			self.userL.graficarAVLM()
 #**************************************************************************#
+	def crearXML(self):
+			self.xml = "<users>\n"
+
+			tempX = self.ejeX.inicio
+			tempXinterno = None
+			tempY = self.ejeY.inicio
+
+			j = 0;
+			i = 0;
+
+			while tempY != None:
+				if tempY == self.ejeY.inicio:
+					self.xml += "<user>\n"
+					i += 1
+					while tempX != None:
+						#xml += "\"" + str(i) + "," + str(j) + "\"[label=\""+tempX.getIndice()+"\", style=filled];\n"
+						i += 1
+						tempX = tempX.siguiente
+					i = 0
+					j += 1
+				tempXinterno = tempY.listaNodos.inicio
+				tempX = self.ejeX.inicio
+				#xml += "\"" + str(i) + "," + str(j) + "\"[label=\""+tempY.getIndice()+"\", style=filled];\n"
+				i += 1
+				while tempX != None:
+					if tempXinterno != None:
+						if tempXinterno.padreX == tempX:
+							self.xml += "<name>" + tempXinterno.getUsuario() + "</name>\n"
+							tempXinterno = tempXinterno.derecha
+						else:
+							self.xml += " "
+					else:
+						self.xml += " "
+					i += 1
+					tempX = tempX.siguiente
+				i = 0
+				j += 1
+				tempY = tempY.siguiente
+			tempX = self.ejeX.inicio
+			while tempX != None:
+				i += 1
+				tempX = tempX.siguiente
+			i += 1
+			
+			self.xml += "</user>\n"
+			self.xml += "</users>"
+			print(self.xml)
+			#src = Source(xml)
+			#src.format = "png"
+			#src.render('test-output/MatrizDispersa', view = True)

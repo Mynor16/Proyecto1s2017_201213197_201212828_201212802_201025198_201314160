@@ -41,6 +41,15 @@ def modificarAVL():
     mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt), str(descripcion))
     return "Articulo modificado con exito!"
 
+@app.route('/cambiarEstadoAVL',methods=['POST']) 
+def cambiarEstadoAVL():
+	usuario = str(request.form['user'])
+    empresa = str(request.form['empresa'])
+    depto = str(request.form['depto'])
+    idArt = str(request.form['id'])
+    mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt))
+    return "Estado actualizado con exito!"
+
 @app.route('/graficarAVL',methods=['POST'])
 def graficarAVL():
 	usuario = str(request.form['user'])
@@ -85,6 +94,8 @@ mt.insertarAVLMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
 mt.insertarAVLMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
 mt.insertarAVLMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
 mt.graficarAVLMatriz("aom", "alo", "gerencia")
+print("***********************XML***************************")
+mt.crearXML()
 #***********************************************#
 
 if __name__ == "__main__":
