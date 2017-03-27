@@ -14,15 +14,40 @@ mt = Matriz()
 """#***************** METODOS AVL *****************#
 @app.route('/insertarAVL',methods=['POST']) 
 def insertarAVL():
+	usuario = str(request.form['user'])
+    empresa = str(request.form['empresa'])
+    depto = str(request.form['depto'])
     articulo = str(request.form['nombre'])
     descripcion = str(request.form['desc'])
-    avlT.insertar(str(articulo), str(descripcion))
+    mt.insertarAVLMatriz(str(usuario), str(empresa), str(depto), str(articulo), str(descripcion))
     return "Articulo insertado con exito!"
+
+@app.route('/eliminarAVL',methods=['POST']) 
+def eliminarAVL():
+	usuario = str(request.form['user'])
+    empresa = str(request.form['empresa'])
+    depto = str(request.form['depto'])
+    idArt = str(request.form['id'])
+    mt.eliminarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt))
+    return "Articulo eliminado con exito!"
+
+@app.route('/modificarAVL',methods=['POST']) 
+def modificarAVL():
+	usuario = str(request.form['user'])
+    empresa = str(request.form['empresa'])
+    depto = str(request.form['depto'])
+    idArt = str(request.form['id'])
+    descripcion = str(request.form['desc'])
+    mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt), str(descripcion))
+    return "Articulo modificado con exito!"
 
 @app.route('/graficarAVL',methods=['POST'])
 def graficarAVL():
-    ls.graficarAVL()
-    return "Lista Graficada" 
+	usuario = str(request.form['user'])
+    empresa = str(request.form['empresa'])
+    depto = str(request.form['depto'])
+	mt.graficarAVLMatriz(str(usuario), str(empresa), str(depto))
+    return "AVL del usuario" + usuario + "graficado!" 
 #***********************************************#
 
 #************ METODOS  MATRIZ  ************#
@@ -49,23 +74,6 @@ def graficarMatriz():
     mt.graficar()
     return "Matriz Graficada" 
 #***********************************************#"""
-
-#***************** METODOS AVL *****************#
-	
-"""avlT.insertarAVL("hoja","fdjkdf")	
-avlT.insertarAVL("libro","dsfsda")	
-avlT.insertarAVL("escritorio","dfddf")	
-avlT.insertarAVL("casa","oerjsd")	
-avlT.insertarAVL("banco","kljfdi")	
-print ("Articulo ingresado con exito!")
-print ("*****************************")
-avlT.graficarAVL()
-print ("Arbol Graficado!")
-print ("*****************************")
-#avlT.eliminarAVL("3")
-#print ("Nodo eliminado")
-#print ("*****************************")
-#avlT.graficarAVL()"""
 
 mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")
 mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")

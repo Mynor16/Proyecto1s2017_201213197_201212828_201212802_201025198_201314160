@@ -118,6 +118,36 @@ class AVL(object):
 		#print (idNode + "--" + nombre)
 		self.enOrden(self.raiz)
 #******************************************************#
+#********************** BÚSQUEDA **********************#
+	def buscar(self, idNode, raiz):
+		if raiz == None:
+			print ("Nodo no existe")
+		elif raiz.idNode == idNode:
+			print ("Nodo: " + idNode + "--" + raiz.getNombre() + " encontrado")
+		elif raiz.idNode < idNode:
+			self.buscar(idNode, raiz.hijoDer)
+		else:
+			self.buscar(idNode, raiz.hijoIzq)
+
+	def buscarAVL(self, idNode):
+		self.raiz = self.buscar(idNode, self.raiz)
+#******************************************************#
+#******************** MODIFICACIÓN ********************#
+	def modificar(self, idNode, descA, raiz):
+		if raiz == None:
+			print ("Nodo no existe")
+		elif raiz.idNode == idNode:
+			print ("Nodo Encontrado: " + idNode + "--" + raiz.getDescripcion())
+			raiz.descripcion = descA
+			print ("Nodo Modificado: " + idNode + "--" + raiz.getDescripcion())
+		elif raiz.idNode < idNode:
+			self.modificar(idNode, descA, raiz.hijoDer)
+		else:
+			self.modificar(idNode, descA, raiz.hijoIzq)
+
+	def modificarAVL(self, idNode, descA):
+		self.modificar(idNode, descA, self.raiz)
+#******************************************************#
 #********************* ELIMINACIÓN ********************#
 	def eliminar(self, idNode, raiz):
 		if raiz == None:

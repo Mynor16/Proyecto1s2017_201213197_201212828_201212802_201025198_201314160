@@ -23,7 +23,9 @@ class Matriz(object):
 			nodoIndiceY = NodoIndice(posY)
 			self.ejeY.insertarIndice(nodoIndiceY)
 		return nodoIndiceY
-
+#**************************************************************************#
+#************************* METODOS PARA LA MATRIZ *************************#
+	#******************** INSERCIÓN ********************#
 	def insertar(self, usuario, contraseña, nombre, departamento, empresa):
 		posX = empresa
 		posY = departamento
@@ -41,7 +43,7 @@ class Matriz(object):
 			nodo.agregarUsuario(usuario)
 			nodo.agregarContraseña(contraseña)
 			nodo.agregarNombre(nombre)
-
+	#******************** BÚSQUEDA ********************#
 	def buscar(self, empresa, depto):
 		tempY = self.ejeY.inicio
 		while tempY != None:
@@ -55,7 +57,7 @@ class Matriz(object):
 					tempXinterno = tempXinterno.derecha
 			tempY = tempY.siguiente
 		return None
-
+	#******************** LOG IN ********************#
 	def verificarUsuario(self, usuario, empresa, depto):
 		self.buscar(empresa, depto)
 		if usuario == self.userL.getUsuario():
@@ -64,18 +66,7 @@ class Matriz(object):
 		else:
 			print ("Usuario " + usuario + " incorrecto!")
 			return "False"
-
-	def insertarAVLEnMatriz(self, usuario, empresa, depto, nombreA, descA):
-		self.buscar(empresa,depto)
-		if usuario == self.userL.getUsuario():
-			self.userL.insertarNodoAVL(nombreA, descA)
-			print("Nodo insertado en Matriz: " + nombreA + "--" + descA)
-
-	def graficarAVLMatriz(self, usuario, empresa, depto):
-		self.buscar(empresa,depto)
-		if usuario == self.userL.getUsuario():
-			self.userL.graficarAVLM()
-
+	#******************** GRAFICAR ********************#
 	def graficar(self):
 		grafo = "digraph G {\n" + "rankdir = TB;\n" + "rank = min;\n" + "node[style=filled,shape=box, label=\"Inicio\", rankdir=UD];\n"
 
@@ -140,3 +131,29 @@ class Matriz(object):
 		src = Source(grafo)
 		src.format = "png"
 		src.render('test-output/MatrizDispersa', view = True)
+#**************************************************************************#
+#************************** METODOS PARA EL AVL ***************************#
+	#********************* INSERCIÓN **********************#
+	def insertarAVLMatriz(self, usuario, empresa, depto, nombreA, descA):
+		self.buscar(empresa, depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.insertarNodoAVL(nombreA, descA)
+			print("Nodo insertado en Matriz: " + nombreA + "--" + descA)
+	#********************* ELIMINACIÓN ********************#
+	def eliminarAVLMatriz(self, usuario, empresa, depto, idArt):
+		self.buscar(empresa, depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.eliminarNodoAVL(idArt)
+			print("Nodo con ID: " + idArt + "eliminado")
+	#******************** MODIFICACIÓN ********************#
+	def modificarAVLMatriz(self, usuario, empresa, depto, idArt, descA):
+		self.buscar(empresa, depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.modificarNodoAVL(idArt, descA)
+			print("Nodo Modificado: " idArt + "--" + descA)
+	#********************** GRAFICAR **********************#
+	def graficarAVLMatriz(self, usuario, empresa, depto):
+		self.buscar(empresa,depto)
+		if usuario == self.userL.getUsuario():
+			self.userL.graficarAVLM()
+#**************************************************************************#
