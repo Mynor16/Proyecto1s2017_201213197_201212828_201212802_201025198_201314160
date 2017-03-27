@@ -249,7 +249,7 @@ class AVL(object):
 			i = nodo.getID()
 			self.grafo += "\"" + str(i) + "\"[label=\"<f0> Izq|<f1>"
 			#self.grafo += "ID: " + nodo.getID() 
-			self.grafo += "ID: " + nodo.getID() + "\\nNombre: " + nodo.getNombre()
+			self.grafo += "ID: " + nodo.getID() + "\\nNombre: " + nodo.getNombre() + "\\nDescripcion: " + nodo.getDescripcion()
 			self.grafo += "|<f2> Der\", style=fille]; \n"
 
 			if nodo.hijoIzq != None:
