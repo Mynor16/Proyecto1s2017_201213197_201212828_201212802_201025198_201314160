@@ -22,7 +22,7 @@
             <% Datos dato = new Datos();
             String respuesta = dato.AgregaraMatriz("Luis","pass","Luis","Ventas","usac");
         //String respuesta = dato.AgregaraMatriz(request.getParameter("Empresa").toString(), request.getParameter("Departamento").toString(), request.getParameter("user").toString()); %>
-        <% out.print("<h2>"+respuesta+"</h2>"); request.setAttribute("user", "dato"); %>
+        <% out.print("<h2>"+respuesta+"</h2>"); %>
             
         </center>
        
