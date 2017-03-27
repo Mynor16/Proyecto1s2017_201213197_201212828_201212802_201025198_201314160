@@ -58,9 +58,9 @@ class Matriz(object):
 			tempY = tempY.siguiente
 		return None
 	#******************** LOG IN ********************#
-	def verificarUsuario(self, usuario, empresa, depto):
+	def verificarUsuario(self, usuario, password, empresa, depto):
 		self.buscar(empresa, depto)
-		if usuario == self.userL.getUsuario():
+		if ((usuario == self.userL.getUsuario()) and (password == self.userL.getContraseña())):
 			print ("Usuario " + usuario + " correcto")
 			return "True"
 		else:
@@ -150,7 +150,7 @@ class Matriz(object):
 		self.buscar(empresa, depto)
 		if usuario == self.userL.getUsuario():
 			self.userL.modificarNodoAVL(idArt, descA)
-			print("Nodo Modificado: " idArt + "--" + descA)
+			print("Nodo Modificado: " + idArt + "--" + descA)
 	#********************** GRAFICAR **********************#
 	def graficarAVLMatriz(self, usuario, empresa, depto):
 		self.buscar(empresa,depto)
