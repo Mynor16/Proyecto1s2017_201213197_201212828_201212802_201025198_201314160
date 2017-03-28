@@ -68,11 +68,24 @@ public class Datos {
                 .add("empresa", empresa)
                 .add("depto", depto)
                 .build();
-            String r = getString("verificarUsuario", formBody); 
-            System.out.println(r);
+            String r = getString("verificarUsuario", formBody);
             System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    "+r);
             return r;
             
-            }    
+            }   
+    
+    public String CrearActivo(String Usuario,String empresa,String depto,String nombre, String descripcion){
+            RequestBody formBody = new FormEncodingBuilder()
+                .add("user", Usuario)
+                .add("empresa", empresa)
+                .add("depto", depto)
+                .add("nombre", nombre)
+                .add("desc", descripcion)    
+                .build();
+            String r = getString("insertarAVL", formBody);
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    "+r);
+            return r;
+            
+            }  
     
 }

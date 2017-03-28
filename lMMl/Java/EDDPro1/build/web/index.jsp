@@ -59,9 +59,9 @@
                                                         <ul class="list-unstyled list-sp-md">
                                                             <li>
                                                                 <h4 class="text-center mg-md">Nombre de Usuario</h4>
-                                                                <form action="iniciar" method="get" >
+                                                                <form action="iniciar" method="get" novalidate >
                                                                     
-                                                                        <input  name="cc1" class="form-control" id="entrarusuario" required placeholder="usuario_ejemplo" />
+                                                                        <input  required name="cc1" class="form-control" id="entrarusuario" required placeholder="usuario_ejemplo" />
                                                                     <h4 class="text-center mg-md">Contraseña</h4>
                                                                 
                                                                    
