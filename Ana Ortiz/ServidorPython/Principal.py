@@ -11,6 +11,27 @@ app = Flask('Proyecto1_ServidorPython')
 avlT = AVL()
 mt = Matriz()
 #***********************************************#
+
+mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")
+mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")
+mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
+#mt.graficar()
+mt.buscar("alo", "gerencia")
+mt.verificarUsuario("aom", "a1415", "alo", "gerencia")
+mt.verificarUsuario("sdfd", "sdfd", "dfd", "sdf")
+mt.insertarAVLMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
+mt.insertarAVLMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
+mt.insertarAVLMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
+mt.insertarAVLMatriz("sdom", "dfkj", "ventas", "laptop", "laptop asus")
+#mt.graficarAVLMatriz("aom", "alo", "gerencia")
+#print("***********************XML***************************")
+mt.crearXML()
+#***********************************************#
+
+if __name__ == "__main__":
+	print("Servidor iniciado...")
+	#app.run(debug=True, host='192.168.0.100')
+
 """#***************** METODOS AVL *****************#
 @app.route('/insertarAVL',methods=['POST']) 
 def insertarAVL():
@@ -55,8 +76,8 @@ def graficarAVL():
 	usuario = str(request.form['user'])
     empresa = str(request.form['empresa'])
     depto = str(request.form['depto'])
-	mt.graficarAVLMatriz(str(usuario), str(empresa), str(depto))
-    return "AVL del usuario" + usuario + "graficado!" 
+	respuesta = mt.graficarAVLMatriz(str(usuario), str(empresa), str(depto))
+    return respuesta
 #***********************************************#
 
 #************ METODOS  MATRIZ  ************#
@@ -81,26 +102,6 @@ def verificarUsuario():
 
 @app.route('/graficarMatriz',methods=['POST']) 
 def graficarMatriz():
-    mt.graficar()
-    return "Matriz Graficada" 
+    respuesta = mt.graficar()
+    return respuesta
 #***********************************************#"""
-
-mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")
-mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")
-mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
-#mt.graficar()
-mt.buscar("alo", "gerencia")
-mt.verificarUsuario("aom", "a1415", "alo", "gerencia")
-mt.verificarUsuario("sdfd", "sdfd", "dfd", "sdf")
-mt.insertarAVLMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
-mt.insertarAVLMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
-mt.insertarAVLMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
-mt.insertarAVLMatriz("sdom", "dfkj", "ventas", "laptop", "laptop asus")
-#mt.graficarAVLMatriz("aom", "alo", "gerencia")
-#print("***********************XML***************************")
-mt.crearXML()
-#***********************************************#
-
-if __name__ == "__main__":
-	print("Servidor iniciado...")
-	#app.run(debug=True, host='192.168.0.100')

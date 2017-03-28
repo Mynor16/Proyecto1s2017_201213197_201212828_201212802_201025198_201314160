@@ -293,6 +293,7 @@ class AVL(object):
 		self.grafo += "} \n"
 		self.grafo += "labelloc=\"t\";\nlabel=\" AVL ARTICULOS ACTIVOS\";}"
 		print(self.grafo)
+		return self.grafo
 		src = Source(self.grafo)
 		src.format = "png"
 		src.render('test-output/AVLTree', view = True)

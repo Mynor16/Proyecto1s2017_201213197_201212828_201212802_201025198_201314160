@@ -133,6 +133,7 @@ class Matriz(object):
 
 		grafo += "labelloc=\"t\"; label=\" MATRIZ DISPERSA\";}"
 		print(grafo)
+		return grafo
 		src = Source(grafo)
 		src.format = "png"
 		src.render('test-output/MatrizDispersa', view = True)
