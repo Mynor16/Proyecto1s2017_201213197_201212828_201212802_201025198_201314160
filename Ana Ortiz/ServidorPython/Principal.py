@@ -63,7 +63,7 @@ def graficarAVL():
 @app.route('/insertarMatriz',methods=['POST']) 
 def insertarMatriz():
     usuario = str(request.form['user'])
-    contraseña = str(request.form['password'])
+    password = str(request.form['password'])
     nombre = str(request.form['name'])
     depto = str(request.form['depto'])
     empresa = str(request.form['empresa'])
@@ -73,10 +73,11 @@ def insertarMatriz():
 @app.route('/verificarUsuario',methods=['POST']) 
 def verificarUsuario():
     usuario = str(request.form['user'])
+    password = str(request.form['password'])
     empresa = str(request.form['empresa'])
     depto = str(request.form['depto'])
-    mt.verificarUsuario(str(usuario), str(empresa), str(depto))
-    return "Usuario" + usuario + "correcto!"
+    respuesta = mt.verificarUsuario(str(usuario), str(password), str(empresa), str(depto))
+    return respuesta
 
 @app.route('/graficarMatriz',methods=['POST']) 
 def graficarMatriz():
@@ -87,15 +88,16 @@ def graficarMatriz():
 mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")
 mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")
 mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
-mt.graficar()
+#mt.graficar()
 mt.buscar("alo", "gerencia")
-mt.verificarUsuario("sdom", "56dsf", "dfkj", "ventas")
-mt.insertarAVLMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
-mt.insertarAVLMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
-mt.insertarAVLMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
-mt.graficarAVLMatriz("aom", "alo", "gerencia")
-print("***********************XML***************************")
-mt.crearXML()
+mt.verificarUsuario("aom", "a1415", "alo", "gerencia")
+mt.verificarUsuario("sdfd", "sdfd", "dfd", "sdf")
+#mt.insertarAVLMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
+#mt.insertarAVLMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
+#mt.insertarAVLMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
+#mt.graficarAVLMatriz("aom", "alo", "gerencia")
+#print("***********************XML***************************")
+#mt.crearXML()
 #***********************************************#
 
 if __name__ == "__main__":

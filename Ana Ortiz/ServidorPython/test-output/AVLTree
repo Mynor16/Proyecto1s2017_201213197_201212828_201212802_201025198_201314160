@@ -1,10 +1,10 @@
 digraph G {node[shape=record, height=0.1];
 { 
-"8a9b349432115ae"[label="<f0> Izq|<f1>ID: 8a9b349432115ae\nNombre: cuaderno\nDescripcion: cuaderno en blanco|<f2> Der", style=fille]; 
-"8a9b349432115ae":f0 -> "040a5bbe18f3488":f1 ;
-"040a5bbe18f3488"[label="<f0> Izq|<f1>ID: 040a5bbe18f3488\nNombre: lapiz\nDescripcion: lapiz mongol hb|<f2> Der", style=fille]; 
-"8a9b349432115ae":f2 -> "dfaa625fa93b958":f1 ;
-"dfaa625fa93b958"[label="<f0> Izq|<f1>ID: dfaa625fa93b958\nNombre: borrador\nDescripcion: borrador maped|<f2> Der", style=fille]; 
+"c7e0278f981c059"[label="<f0> Izq|<f1>ID: c7e0278f981c059\nNombre: lapiz\nDescripcion: lapiz mongol hb|<f2> Der", style=fille]; 
+"c7e0278f981c059":f0 -> "7521f89008f7ca9":f1 ;
+"7521f89008f7ca9"[label="<f0> Izq|<f1>ID: 7521f89008f7ca9\nNombre: borrador\nDescripcion: borrador maped|<f2> Der", style=fille]; 
+"c7e0278f981c059":f2 -> "ea77d03be14ea8d":f1 ;
+"ea77d03be14ea8d"[label="<f0> Izq|<f1>ID: ea77d03be14ea8d\nNombre: cuaderno\nDescripcion: cuaderno en blanco|<f2> Der", style=fille]; 
 } 
 labelloc="t";
 label=" AVL ARTICULOS ACTIVOS";}

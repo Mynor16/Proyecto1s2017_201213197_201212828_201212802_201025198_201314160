@@ -48,6 +48,9 @@ class NodoListaNodos(object):
 	def modificarNodoAVL(self, idNode, descripcion):
 		self.avlTree.modificarAVL(idNode, descripcion)
 
+	def disponibilidadNodoAVL(self, idNode):
+		self.avlTree.cambiarEstadoAVL(idNode)
+
 	def graficarAVLM(self):
 		self.avlTree.graficarAVL()
 		

@@ -7,8 +7,8 @@ class Matriz(object):
 	def __init__(self):
 		self.ejeX = ListaIndice()
 		self.ejeY = ListaIndice()
-		self.indice = None
-		self.userL = None
+		self.indice = ""
+		self.userL = ""
 		self.xml = ""
 
 	def getNodoIndiceX(self, posX):
@@ -53,9 +53,13 @@ class Matriz(object):
 				while tempXinterno != None:
 					if tempXinterno.padreX.getIndice() == empresa:
 						self.userL = tempXinterno
-						print("Nodo " + self.userL.getUsuario() + " encontrado")
+						#print("Nodo " + self.userL.getUsuario() + " encontrado")
 						return tempXinterno
+					else:
+						print("Empresa no encontrada")
 					tempXinterno = tempXinterno.derecha
+			else:
+				print("Departamento no encontrado")
 			tempY = tempY.siguiente
 		return None
 	#******************** LOG IN ********************#
