@@ -22,4 +22,5 @@
     <string name="rentar_producto">Rentar</string>
     <string name="devoluciones">Devoluciones</string>
     <string name="btn_devolver">Devolver</string>
+    <string name="btn_ingresarmenu">Comprobar Datos</string>
 </resources>
