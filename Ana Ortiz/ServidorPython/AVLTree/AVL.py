@@ -9,6 +9,7 @@ class AVL(object):
 		self.raiz = None
 		self.h = False
 		self.grafo = ""
+		self.xml = ""
 #******************************************************#
 #********************* ROTACIONES *********************#
 	def rotacionIzquierda(self, n, n1):
@@ -153,7 +154,7 @@ class AVL(object):
 		if raiz == None:
 			print ("Nodo no existe")
 		elif raiz.idNode == idNode:
-			print ("Nodo Encontrado: " + idNode + "--" + str(raiz.getDisponibilidad()))
+			print ("Estado Encontrado: " + idNode + "--" + str(raiz.getDisponibilidad()))
 			raiz.rentado = True
 			print ("Estado Modificado: " + idNode + "--" + str(raiz.getDisponibilidad()))
 		elif raiz.idNode < idNode:
@@ -295,4 +296,38 @@ class AVL(object):
 		src = Source(self.grafo)
 		src.format = "png"
 		src.render('test-output/AVLTree', view = True)
+#******************************************************#
+#*********************** XML AVL **********************#
+	def xmlNodo(self, nodo):
+		if nodo != None:
+			i = nodo.getID()
+
+			self.xml += "<articulo>\n"
+			self.xml += "<id> " + nodo.getID() + " </id>\n"
+			self.xml += "<nombre> " + nodo.getNombre() + " </nombre>\n"
+			self.xml += "<descripcion> " + nodo.getDescripcion() + " </descripcion>\n"
+			self.xml += "<estado> " + str(nodo.getDisponibilidad()) + " </estado>\n"			
+			self.xml += "</articulo>\n"
+
+			if nodo.hijoIzq != None:
+				idIzq = nodo.hijoIzq.getID()
+				self.xmlNodo(nodo.hijoIzq)
+
+			if nodo.hijoDer != None:
+				idDer = nodo.hijoDer.getID()
+				self.xmlNodo(nodo.hijoDer)
+		return self.xml
+
+	def xmlAVL(self):
+
+		if self.raiz != None:
+			self.xml += "<articulos>\n"
+			self.xmlNodo(self.raiz)
+			self.xml += "</articulos>\n"
+
+		print(self.xml)
+		return self.xml
+		#src = Source(self.grafo)
+		#src.format = "png"
+		#src.render('test-output/AVLTree', view = True)
 #******************************************************#

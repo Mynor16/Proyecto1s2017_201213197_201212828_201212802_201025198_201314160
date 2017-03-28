@@ -3,7 +3,7 @@ class NodoAVL(object):
 		self.idNode = idNode
 		self.nombre = nombre
 		self.descripcion = descripcion
-		self.rentado = False
+		self.rentado = rentado
 		self.fe = 0
 		self.hijoIzq = None
 		self.hijoDer = None

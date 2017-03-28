@@ -53,4 +53,6 @@ class NodoListaNodos(object):
 
 	def graficarAVLM(self):
 		self.avlTree.graficarAVL()
-		
+
+	def xmlAVLM(self):
+		self.avlTree.xmlAVL()
