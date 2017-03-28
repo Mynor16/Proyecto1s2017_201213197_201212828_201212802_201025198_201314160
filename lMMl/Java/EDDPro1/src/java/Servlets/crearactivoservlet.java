@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Proyecto1.Datos;
-import Proyecto1.Datos;
 
 /**
  *
  * @author lMMl
  */
-@WebServlet(name = "servletcrearusuario", urlPatterns = {"/servletcrearusuario"})
-public class servletcrearusuario extends HttpServlet {
+@WebServlet(name = "crearactivoservlet", urlPatterns = {"/crearactivoservlet"})
+public class crearactivoservlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class servletcrearusuario extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet servletcrearusuario</title>");            
+            out.println("<title>Servlet crearactivoservlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet servletcrearusuario at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet crearactivoservlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,28 +59,17 @@ public class servletcrearusuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String nombre=request.getParameter("nombreca");
+        String descripcion=request.getParameter("descripcionca");
+        String usuario = (String) request.getSession().getAttribute("usuariolog");
+        String depto = (String) request.getSession().getAttribute("departamentolog");
+        String empresa = (String) request.getSession().getAttribute("empresalog");
+        //System.out.println(nombre+"  "+descripcion);
         Datos dato = new Datos();
-        String Usuario=request.getParameter("usuarionu");
-        String pass=request.getParameter("contrasenanu");
-        String nom =request.getParameter("nombrenu");
-        String depto=request.getParameter("departamentonu");
-        String empresa=request.getParameter("empresanu");
-        String Rdato = dato.AgregaraMatriz(Usuario, pass, nom, depto, empresa);
-        if (Rdato.equals("Usuario insertado con exito!")){
-            response.sendRedirect("index.jsp");
-            request.getSession().setAttribute("mensajederegistro", "Registro del usuario "+Usuario+" exitoso!");
-            request.getSession().setAttribute("llavemensajeregistro", "true");
-        }else {
-            response.sendRedirect("nuevousuario.jsp");
-            request.getSession().setAttribute("mensajederegistro", "Error, intentolo de nuevo!");
-            request.getSession().setAttribute("llavederegistro", "true");
-        }
+        dato.CrearActivo(usuario, empresa, depto, nombre, descripcion);
+        response.sendRedirect("menuusuario.jsp");
         
-        System.out.println(Usuario+"    "+pass+"   "+nom+"  "+depto+"   "+empresa);
-        
-        
-        ///processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**

@@ -38,6 +38,8 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
+                             <h4 class="text-center mg-md"><%if (session.getAttribute("mensajederegistro")!="null"){ out.print(session.getAttribute("mensajederegistro"));}%></h4>
+                           
                         </div>
                         <div class="collapse navbar-collapse navbar-1">
                             <ul class="site-navigation nav navbar-nav">
@@ -57,16 +59,24 @@
                                                         <ul class="list-unstyled list-sp-md">
                                                             <li>
                                                                 <h4 class="text-center mg-md">Nombre de Usuario</h4>
-                                                                <form action="iniciar" method="get" >
+                                                                <form action="iniciar" method="get" novalidate >
                                                                     
-                                                                        <input  name="cc1" class="form-control" id="entrarusuario" required placeholder="usuario_ejemplo" />
-                                                                    
-                                                                
-                                                            
-                                                                        <h4 class="text-center mg-md">Contraseña</h4>
+                                                                        <input  required name="cc1" class="form-control" id="entrarusuario" required placeholder="usuario_ejemplo" />
+                                                                    <h4 class="text-center mg-md">Contraseña</h4>
                                                                 
                                                                    
                                                                         <input tipe="text" name="cc2" class="form-control" id="entrarcontraseña" required placeholder="Contraseña_ejemplo" type="password" />
+                                                                        <h4 class="text-center mg-md">Empresa</h4>
+                                                                
+                                                                   
+                                                                        <input tipe="text" name="cc3" class="form-control" id="entrarcontraseña" required placeholder="empresa_ejemplo" type="text" />
+                                                                        
+                                                                
+                                                            
+                                                                        <h4 class="text-center mg-md">Departamento</h4>
+                                                                
+                                                                   
+                                                                        <input tipe="text" name="cc4" class="form-control" id="entrarcontraseña" required placeholder="departamento_ejemplo" type="text" />
                                                                         
                                                                         <input class="btn btn-d btn-lg btn-block animated puffIn " id="Entrar" required placeholder="Contraseña_ejemplo" type="submit" />
                                                                         

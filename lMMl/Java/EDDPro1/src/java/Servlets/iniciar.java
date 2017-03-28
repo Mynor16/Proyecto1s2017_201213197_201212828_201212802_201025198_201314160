@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Proyecto1.Datos;
 
 /**
  *
@@ -69,8 +70,23 @@ public class iniciar extends HttpServlet {
         
         String a = request.getParameter("cc1");
         String b = request.getParameter("cc2");
+        String c = request.getParameter("cc3");
+        String d = request.getParameter("cc4");
         
-        System.out.println("///nuevo//////////"+a+"//////////////"+b);
+        Datos dato = new Datos();
+        System.out.println(a+"  "+b+"  "+c+"  "+d);
+        String verificadoke = dato.VerificarUsuario(a, b, c, d);
+        
+        if (verificadoke.equals("True")){
+            request.getSession().setAttribute("usuariolog", a);
+            request.getSession().setAttribute("empresalog", c);
+            request.getSession().setAttribute("departamentolog", d);
+            response.sendRedirect("menuusuario.jsp");
+        } else {
+            response.sendRedirect("index.jsp");
+            request.getSession().setAttribute("mensajederegistro", "Datos incorrectos, intentelo de nuevo!");
+            request.getSession().setAttribute("llavedegistro", "true");
+        }
         
         
         

@@ -21,26 +21,25 @@
         <script src="./js/jquery-2.1.0.min.js"></script>
         <script src="./js/bootstrap.min.js"></script>
         <script src="./js/blocs.min.js"></script> 
-        <title>MenuUsuario<%= session.getAttribute("variable")%></title> <!-- Google Analytics --> <!-- Google Analytics END --> 
+        <title>Usuario</title> <!-- Google Analytics --> <!-- Google Analytics END --> 
     </head><body><!-- Main container -->
         <div class="page-container"> <!-- bloc-0 -->
             <div class="bloc bgc-white l-bloc" id="bloc-0">
                 <div class="container bloc-sm">
                     <nav class="navbar nav-center row">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo" /></a>
+                            <a class="navbar-brand" href="index.jsp"><img src="img/logo.png" alt="logo" /></a>
                             <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
+                            <h4 class="text-center mg-md"> Usuario Activo: <%=session.getAttribute("usuariolog")%></h4>
                         </div>
                         <div class="collapse navbar-collapse navbar-1">
                             <ul class="site-navigation nav navbar-nav">
-                                <li>
-                                    <a href="index.html">Inicio</a>
-                                </li>
+                                
                                 <li><a href="menuusuario.jsp">Menu Usuario</a></li>
                                 <li><a href="crearactivo.jsp">Crear</a></li>
                                 <li><a href="eliminaractivo.jsp">Eliminar</a></li>
