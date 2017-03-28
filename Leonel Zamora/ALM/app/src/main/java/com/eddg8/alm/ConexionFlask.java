@@ -49,6 +49,7 @@ public class ConexionFlask {
                     .add("p4",departamento)
                     .build();
             try{
+                URL url = new URL("http://192.168.1.7:5000/login");
                 Request request = new Request.Builder().url(url).post(formbody).build();
                 Response response  = webclient.newCall(request).execute();
                 response_string  = response.body().string();
