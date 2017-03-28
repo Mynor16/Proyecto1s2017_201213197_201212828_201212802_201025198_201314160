@@ -62,18 +62,19 @@
                                                             
                                                         <form action="servletcrearusuario" method="get">
                                                                
-                                                            <input name="nombrenu" class="form-control" id="nuevonombre"  />
+                                                            <input type="text" name="nombrenu" class="form-control" id="nuevonombre"  />
                                                                 
                                                             
                                                         
                                                         <h4 class="text-center mg-md">Nombre de Usuario</h4>
                                                                    
                                                                        
-                                                        <input name="usuarionu" class="form-control" id="nuevousuario"  />
+                                                        <input type="text" name="usuarionu" class="form-control" id="nuevousuario"  />
                                                                         
                                                                     
                                                         
                                                         <h4 class="text-center mg-md">Contraseña</h4>
+                                                        
                                                             
                                                                 
                                                         <input name="contrasenanu" class="form-control" id="nuevocontraseña" type="password" />
@@ -84,7 +85,7 @@
                                                        
                                                             
                                                                
-                                                        <input name="departamentonu" class="form-control" id="nuevodepartamento" />
+                                                        <input type="text" name="departamentonu" class="form-control" id="nuevodepartamento" />
                                                                
                                                             
                                                             <h4 class="text-center mg-md">Empresa</h4>

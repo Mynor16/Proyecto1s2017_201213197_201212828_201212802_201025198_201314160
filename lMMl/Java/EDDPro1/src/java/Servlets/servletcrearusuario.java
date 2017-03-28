@@ -69,9 +69,13 @@ public class servletcrearusuario extends HttpServlet {
         String empresa=request.getParameter("empresanu");
         String Rdato = dato.AgregaraMatriz(Usuario, pass, nom, depto, empresa);
         if (Rdato.equals("Usuario insertado con exito!")){
-            response.sendRedirect("menuusuario.jsp");
-            request.getSession().setAttribute("variable", Usuario);
-        
+            response.sendRedirect("index.jsp");
+            request.getSession().setAttribute("mensajederegistro", "Registro del usuario "+Usuario+" exitoso!");
+            request.getSession().setAttribute("llavemensajeregistro", "true");
+        }else {
+            response.sendRedirect("nuevousuario.jsp");
+            request.getSession().setAttribute("mensajederegistro", "Error, intentolo de nuevo!");
+            request.getSession().setAttribute("llavederegistro", "true");
         }
         
         System.out.println(Usuario+"    "+pass+"   "+nom+"  "+depto+"   "+empresa);
