@@ -27,7 +27,7 @@ public class Datos {
         try {
             //URL url = new URL("http://192.168.0.21:5000/" + metodo
             //URL url = new URL("http://192.168.43.165:5000/" + metodo);
-            URL url = new URL("http://0.0.0.0:5000/" + metodo);
+            URL url = new URL("http://192.168.0.41:5000/" + metodo);
             Request request = new Request.Builder().url(url).post(formBody).build();
             Response response = webClient.newCall(request).execute();//Aqui obtiene la respuesta en dado caso si hayas pues un return en python
             String response_string = response.body().string();//y este seria el string de las respuesta
@@ -73,6 +73,33 @@ public class Datos {
             return r;
             
             }   
+    public String ModoficarA(String Usuario, String empresa,String depto, String id,String desc){
+            RequestBody formBody = new FormEncodingBuilder()
+                .add("user", Usuario)
+                .add("empresa", empresa)
+                .add("depto", depto)
+                .add("id", id)
+                .add("desc", desc)
+                .build();
+            String r = getString("modificarAVL", formBody);
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    "+r);
+            return r;
+            
+            }
+    
+       public String EliminarA(String Usuario, String empresa,String depto, String id){
+            RequestBody formBody = new FormEncodingBuilder()
+                .add("user", Usuario)
+                .add("empresa", empresa)
+                .add("depto", depto)
+                .add("id", id)
+                .build();
+            String r = getString("eliminarAVL", formBody);
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    "+r);
+            return r;
+            
+            }
+    
     
     public String CrearActivo(String Usuario,String empresa,String depto,String nombre, String descripcion){
             RequestBody formBody = new FormEncodingBuilder()
