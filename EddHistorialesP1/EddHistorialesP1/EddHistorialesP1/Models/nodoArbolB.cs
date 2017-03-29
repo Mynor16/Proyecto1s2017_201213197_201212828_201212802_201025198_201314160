@@ -14,6 +14,7 @@ namespace EddHistorialesP1.Models
         public String deptUser { get; set; } // departamento del usuario que prestó el equipo
         public String fechaRenta { get; set; } // fecha en que se prestó el equipo
         public int periodoRenta { get; set; } // teimpo que se tendrá el equipo prestado.
+        public Boolean rentado { get; set; }// disponibilidad actualpara la renta
 
     }
 }

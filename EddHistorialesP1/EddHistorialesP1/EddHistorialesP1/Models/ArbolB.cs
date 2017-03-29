@@ -14,6 +14,8 @@ namespace EddHistorialesP1.Models
         EddP1PaginaArbolB auxDe;
         int pagina = 0;
         bool Esta;
+        String [] IDencontrados;
+        int contador=0;
 
         public ArbolB()
         {
@@ -24,7 +26,6 @@ namespace EddHistorialesP1.Models
         private Boolean BuscarNodoEnPagina(nodoArbolB clave, EddP1PaginaArbolB raiz)
         {
             // VERIFICAMOS SI LA CLAVE ES MENOR A LA PAGINA PARA IR EN LA PRIMER PAGINA
-            //if (int.Parse(clave.idT) < int.Parse(raiz.claves[0].idT))
             if (0 > string.Compare(clave.idT, raiz.claves[0].idT))
             {
                 this.auxPos = 0;
@@ -34,7 +35,6 @@ namespace EddHistorialesP1.Models
             {
                 int limite = raiz.cuenta;
                 //BUSCAMOS LA POSICION DONDE SE ENCUENTRA LA CLAVE O DONDE DEBERIA ESTAR
-                //while (int.Parse(clave.idT) < int.Parse(raiz.claves[limite - 1].idT))
                 while (0 > string.Compare(clave.idT, raiz.claves[limite - 1].idT))
                 {
                     limite--;
@@ -67,6 +67,7 @@ namespace EddHistorialesP1.Models
                 if (BuscarNodoEnPagina(clave, raiz))
                 {
                     // Nodo repetido, no se puede ingresar
+                    System.Diagnostics.Debug.WriteLine("nodo repetido");
                     // Agregar anuncio en ANDROID ;)
                 }
                 else
@@ -85,6 +86,7 @@ namespace EddHistorialesP1.Models
                         {
                             //INSERTAMOS EN ESTA PAGINA
                             raiz.insertaOrdenado(clave, auxPos, null);
+                            contador++;
                             //****** Inserccion completa
                         }
                     }
@@ -92,6 +94,7 @@ namespace EddHistorialesP1.Models
                     {
                         // MANDAMOS A INSERTAR EN LA PAGINA HIJA 
                         insertar(raiz.ramas[auxPos], clave);
+                        contador++;
                         // VERIFICAMOS SI EN LA PAGINA HIJA HUBO UNA DIVISION DE PAGINA
                         if (claveMedia != null)
                         {
@@ -175,6 +178,54 @@ namespace EddHistorialesP1.Models
             return BuscarNodo(codigo, this.raiz);
         }
 
+        public void buscarID(String n)
+        {
+            System.Diagnostics.Debug.WriteLine("busacando coinsidencias con el usuario "+ n);
+            IDencontrados = new string[contador];
+            pagina = 0;
+            buscarID(this.raiz, n);
+        }
+
+        private void buscarID(EddP1PaginaArbolB raiz, String n)
+        {
+            int k = 0;
+            if (raiz != null)
+            {
+                int j = 0;
+                int f = 1;
+                while (j < raiz.cuenta)
+                {
+                    System.Diagnostics.Debug.WriteLine("comparando " + n + " con " + raiz.claves[j].nameUser);
+                    if (n == raiz.claves[j].nameUser)
+                    {
+                        IDencontrados[k] = raiz.claves[j].nameUser;
+                        System.Diagnostics.Debug.WriteLine("los datos coinsiden");
+                        k++;
+                    }
+                    f += 2;
+                    j++;
+                }
+                j = 0;
+                f = 0;
+                while (j <= raiz.cuenta)
+                {
+                    if (raiz.ramas[j] != null)
+                    {
+
+                        buscarID(raiz.ramas[j], n);
+                    }
+                    f += 2;
+                    j++;
+                }
+            }
+            int x =0;
+            while (IDencontrados[x] != null)
+            {
+                System.Console.WriteLine(IDencontrados[k]);
+            }
+        }
+
+
         private nodoArbolB BuscarNodo(string codigo, EddP1PaginaArbolB raiz)
         {
             //SI LA PAGINA ES NULA LA CLAVE NO EXISTE
@@ -222,6 +273,7 @@ namespace EddHistorialesP1.Models
                 for (int i = 0; i < raiz.claves.Count(); i++)
                     if (raiz.claves[i] != null)
                         if (!raiz.claves[i].idT.Equals(codigo)) this.ingresar(raiz.claves[i]);
+                contador--;
                 for (int i = 0; i < raiz.ramas.Count(); i++)
                     EliminarNodo(codigo, raiz.ramas[i]);
             }
@@ -274,7 +326,7 @@ namespace EddHistorialesP1.Models
                 texto = n + "p" + this.pagina + " [label=\"<f0> -  ";
                 while (j < raiz.cuenta)
                 {
-                    texto += "|<f" + f + "> " + raiz.claves[j].idT + "\n " + raiz.claves[j].idT + " |<f" + (f + 1) + "> -";
+                    texto += "|<f" + f + "> " + "ID_T: " + raiz.claves[j].idT + "\\n ID_User: " + raiz.claves[j].nameUser + "\\n ID_P: " + raiz.claves[j].idP + "\\n Empresa: " + raiz.claves[j].EmpresaUser + "\\n Depto: " + raiz.claves[j].deptUser + "\\n Fecha_Renta:" + raiz.claves[j].fechaRenta + "\\n Periodo:" + raiz.claves[j].periodoRenta + "\\n Rentado: " + raiz.claves[j].rentado + " |<f" + (f + 1) + "> -";
                     f += 2;
                     j++;
                 }
@@ -299,75 +351,5 @@ namespace EddHistorialesP1.Models
         }
         //_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*
 
-        /*
-        public void Eliminar(string clave)
-        {
-            if (this.raiz.estaVacia())
-            {
-                System.Diagnostics.Debug.WriteLine("no hay elementos en el arbol");
-            }
-            else
-                Eliminara(this.raiz, clave);
-        }
-        
-        public void Eliminara(EddP1PaginaArbolB Raiz, string clave)
-        {
-            try
-            {
-                EliminarRegistro(Raiz, BuscarNodo(clave));
-            }
-            catch (Exception e)
-            {
-                Esta = false;
-            }
-            if (!Esta)
-                System.Diagnostics.Debug.WriteLine("No se encontro el elemento");
-            else
-            {
-                if (Raiz.cuenta == 0)
-                    Raiz = Raiz.ramas[0];
-                this.raiz = Raiz;
-                System.Diagnostics.Debug.WriteLine("Eliminacion completa");
-            }
-        }
-        private int buscarPos(EddP1PaginaArbolB raiz, nodoArbolB c)
-        {
-            int pos = 0;
-            while (c.idT != raiz.claves[pos].idT)
-            {
-                pos++;
-            }
-
-            return pos;
-        }
-
-        public void EliminarRegistro(EddP1PaginaArbolB raiz, nodoArbolB c)
-        {
-            int pos = 0;
-            nodoArbolB sucesor;
-            if (raiz.estaVacia())
-                Esta = false;
-            else
-            {
-                pos = buscarPos(raiz, c);
-                if (Esta)
-                {
-                    if (raiz.ramas[pos - 1].estaVacia())
-                        Quitar(raiz, pos);
-                    else
-                    {
-                        Sucesor(raiz, pos);
-                        EliminarRegistro(raiz.ramas[pos], raiz.claves[pos - 1]);
-                    }
-                }
-                else
-                {
-                    EliminarRegistro(raiz.ramas[pos], c);
-                    if ((raiz.ramas[pos] != null) && (raiz.ramas[pos].cuenta < 2))
-                        Restablecer(raiz, pos);
-                }
-            }
-        }
-         */
     }
 }
