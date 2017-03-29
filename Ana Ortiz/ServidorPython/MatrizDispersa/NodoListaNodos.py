@@ -52,7 +52,8 @@ class NodoListaNodos(object):
 		self.avlTree.cambiarEstadoAVL(idNode)
 
 	def graficarAVLM(self):
-		self.avlTree.graficarAVL()
+		graphAVL = self.avlTree.graficarAVL()
+		return graphAVL
 
 	def xmlAVLM(self):
-		self.avlTree.xmlAVL()
+		return self.avlTree.xmlAVL()

@@ -1,7 +1,6 @@
 from flask import Flask, request, Response
 
 #********** IMPORTACIONES DE CLASES **********#
-
 from AVLTree.AVL import AVL
 from MatrizDispersa.Matriz import Matriz
 #*********************************************#
@@ -11,11 +10,10 @@ app = Flask('Proyecto1_ServidorPython')
 avlT = AVL()
 mt = Matriz()
 #***********************************************#
-
 mt.insertar("aom", "a1415", "Ana", "gerencia", "alo")
 mt.insertar("sdom", "56dsf", "Samuel", "ventas", "dfkj")
 mt.insertar("ieri", "dsf", "Esdf", "compras", "alo")
-#mt.graficar()
+mt.graficar()
 mt.buscar("alo", "gerencia")
 mt.verificarUsuario("aom", "a1415", "alo", "gerencia")
 mt.verificarUsuario("sdfd", "sdfd", "dfd", "sdf")
@@ -23,8 +21,9 @@ mt.insertarAVLMatriz("aom", "alo", "gerencia", "lapiz", "lapiz mongol hb")
 mt.insertarAVLMatriz("aom", "alo", "gerencia", "borrador", "borrador maped")
 mt.insertarAVLMatriz("aom", "alo", "gerencia", "cuaderno", "cuaderno en blanco")
 mt.insertarAVLMatriz("sdom", "dfkj", "ventas", "laptop", "laptop asus")
-#mt.graficarAVLMatriz("aom", "alo", "gerencia")
-#print("***********************XML***************************")
+mt.graficarAVLMatriz("aom", "alo", "gerencia")
+mt.graficarAVLMatriz("sdom", "dfkj", "ventas")
+print("***********************XML***************************")
 mt.crearXML()
 #***********************************************#
 
@@ -59,8 +58,8 @@ def modificarAVL():
     depto = str(request.form['depto'])
     idArt = str(request.form['id'])
     descripcion = str(request.form['desc'])
-    mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt), str(descripcion))
-    return "Articulo modificado con exito!"
+    respuesta = mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt), str(descripcion))
+    return respuesta
 
 @app.route('/cambiarEstadoAVL',methods=['POST']) 
 def cambiarEstadoAVL():
@@ -68,8 +67,8 @@ def cambiarEstadoAVL():
     empresa = str(request.form['empresa'])
     depto = str(request.form['depto'])
     idArt = str(request.form['id'])
-    mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt))
-    return "Estado actualizado con exito!"
+    respuesta = mt.modificarAVLMatriz(str(usuario), str(empresa), str(depto), str(idArt))
+    return respuesta
 
 @app.route('/graficarAVL',methods=['POST'])
 def graficarAVL():
@@ -103,5 +102,10 @@ def verificarUsuario():
 @app.route('/graficarMatriz',methods=['POST']) 
 def graficarMatriz():
     respuesta = mt.graficar()
+    return respuesta
+
+@app.route('/archivoXML',methods=['POST']) 
+def archivoXML():
+    respuesta = mt.crearXML()
     return respuesta
 #***********************************************#"""

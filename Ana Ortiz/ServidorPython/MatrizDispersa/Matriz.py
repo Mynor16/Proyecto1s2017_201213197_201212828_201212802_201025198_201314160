@@ -133,10 +133,11 @@ class Matriz(object):
 
 		grafo += "labelloc=\"t\"; label=\" MATRIZ DISPERSA\";}"
 		print(grafo)
-		return grafo
+		
 		src = Source(grafo)
 		src.format = "png"
 		src.render('test-output/MatrizDispersa', view = True)
+		return grafo
 #**************************************************************************#
 #************************** METODOS PARA EL AVL ***************************#
 	#********************* INSERCIÓN **********************#
@@ -157,17 +158,22 @@ class Matriz(object):
 		if usuario == self.userL.getUsuario():
 			self.userL.modificarNodoAVL(idArt, descA)
 			print("Nodo Modificado: " + idArt + "--" + descA)
+			return "Nodo Modificado: " + idArt + "--" + descA
 	#******************** DISPONIBILIDAD ********************#
 	def disponibilidadAVLMatriz(self, usuario, empresa, depto, idArt):
 		self.buscar(empresa, depto)
 		if usuario == self.userL.getUsuario():
 			self.userL.disponibilidadNodoAVL(idArt)
 			print("Nodo Modificado: " + idArt)
+			return "Nodo Modificado: " + idArt
 	#********************** GRAFICAR **********************#
 	def graficarAVLMatriz(self, usuario, empresa, depto):
 		self.buscar(empresa,depto)
+		print(self.userL.getUsuario())
 		if usuario == self.userL.getUsuario():
-			self.userL.graficarAVLM()
+			print("entro al if")
+			graf = self.userL.graficarAVLM()
+			print(graf)
 #**************************************************************************#
 	def crearXML(self):
 			xml = "<users>\n"
@@ -194,25 +200,13 @@ class Matriz(object):
 					if tempXinterno != None:
 						if tempXinterno.padreX == tempX:
 							xml += "<user>\n"
-							xml += "<name>" + tempXinterno.getUsuario() + "</name>\n"
-							#self.xml += "<articulos>\n"
-							#self.xml += "<articulo>\n"
+							xml += "<name>" + tempXinterno.getUsuario() + "</name>\n"							
 
-							self.buscar(tempXinterno.padreY,tempXinterno.padreX)
-							if tempXinterno.getUsuario() == self.userL.getUsuario():
-								#xml += "<articulos>"
-								xml += str(self.userL.xmlAVLM())
-							else:
-								xml += "No tiene articulos"
+							xml += tempXinterno.xmlAVLM()
 							
-							#self.xml += "</articulo>\n"
-							#self.xml += "</articulos>\n"
 							xml += "</user>\n"
 							tempXinterno = tempXinterno.derecha
-						else:
-							xml += " "
-					else:
-						xml += " "
+						
 					i += 1
 					tempX = tempX.siguiente
 				i = 0
@@ -227,6 +221,4 @@ class Matriz(object):
 
 			xml += "</users>"
 			print(xml)
-			#src = Source(xml)
-			#src.format = "png"
-			#src.render('test-output/MatrizDispersa', view = True)
+			return xml
