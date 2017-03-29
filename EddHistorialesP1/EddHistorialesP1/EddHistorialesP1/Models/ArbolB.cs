@@ -170,8 +170,13 @@ namespace EddHistorialesP1.Models
             }
         }
 
+        public string asignarID()
+        {
+            string codigo;
+            codigo = Guid.NewGuid().ToString("N").Substring(0, 15);
+                return codigo;
 
-
+        }
 
         public nodoArbolB BuscarNodo(string codigo)
         {
@@ -272,7 +277,7 @@ namespace EddHistorialesP1.Models
             {
                 for (int i = 0; i < raiz.claves.Count(); i++)
                     if (raiz.claves[i] != null)
-                        if (!raiz.claves[i].idT.Equals(codigo)) this.ingresar(raiz.claves[i]);
+                        if (!raiz.claves[i].idP.Equals(codigo)) this.ingresar(raiz.claves[i]);
                 contador--;
                 for (int i = 0; i < raiz.ramas.Count(); i++)
                     EliminarNodo(codigo, raiz.ramas[i]);
