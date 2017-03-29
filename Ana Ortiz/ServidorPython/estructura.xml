@@ -1,0 +1,39 @@
+<users>
+	<user>
+		<name>ieri</name>
+	</user>
+	<user>
+		<name>aom</name>
+		<articulos>
+			<articulo>
+				<id> b6fb9ad5b344592 </id>
+				<nombre> borrador </nombre>
+				<descripcion> borrador maped </descripcion>
+				<estado> False </estado>
+			</articulo>
+			<articulo>
+				<id> 9faf3b92701ab3b </id>
+				<nombre> cuaderno </nombre>
+				<descripcion> cuaderno en blanco </descripcion>
+				<estado> False </estado>
+			</articulo>
+			<articulo>
+				<id> ed9794fdcd1669c </id>
+				<nombre> lapiz </nombre>
+				<descripcion> lapiz mongol hb </descripcion>
+				<estado> False </estado>
+			</articulo>
+		</articulos>
+	</user>
+	<user>
+		<name>sdom</name>
+		<articulos>
+			<articulo>
+				<id> 9936b206a174c07 </id>
+				<nombre> laptop </nombre>
+				<descripcion> laptop asus </descripcion>
+				<estado> False </estado>
+			</articulo>
+		</articulos>
+	</user>
+</users>

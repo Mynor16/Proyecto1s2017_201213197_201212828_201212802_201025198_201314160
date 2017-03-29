@@ -30,7 +30,7 @@
                 <div class="container bloc-sm">
                     <nav class="navbar nav-center row">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html">
+                            <a class="navbar-brand" href="index.jsp">
                                 <img src="img/logo.png" alt="logo" /></a>
                             <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
                                 <span class="sr-only">Toggle navigation</span>
