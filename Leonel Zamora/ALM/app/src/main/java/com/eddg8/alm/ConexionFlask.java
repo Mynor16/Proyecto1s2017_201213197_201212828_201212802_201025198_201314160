@@ -4,6 +4,7 @@ package com.eddg8.alm;
  * Created by Alejandro on 18/03/2017.
  */
 import android.os.AsyncTask;
+import android.os.Parcelable;
 
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -24,6 +25,7 @@ public class ConexionFlask {
     String dato,contraseñan,empresa,departamento;
     //variable que recibe la respueta del webservice para saber si los datos estan correctos
     String respuesta;
+
     //variable para saber si se puede entrar al menu principal
     boolean entrar = false;
 
@@ -43,13 +45,13 @@ public class ConexionFlask {
         @Override
         protected Void doInBackground(Void... params) {
             RequestBody formbody  = new FormEncodingBuilder()
-                    .add("p",dato)
-                    .add("p2",contraseñan)
-                    .add("p3",empresa)
-                    .add("p4",departamento)
+                    .add("user",dato)
+                    .add("password",contraseñan)
+                    .add("empresa",empresa)
+                    .add("depto",departamento)
                     .build();
             try{
-                URL url = new URL("http://192.168.1.7:5000/login");
+                URL url = new URL("http://192.168.1.7:5000/verificarUsuario");
                 Request request = new Request.Builder().url(url).post(formbody).build();
                 Response response  = webclient.newCall(request).execute();
                 response_string  = response.body().string();
@@ -72,7 +74,10 @@ public class ConexionFlask {
                 entrar = false;
                 p.combrabarDatos(entrar);
             }
+
             super.onPostExecute(aVoid);
         }
     }
+
+
 }
